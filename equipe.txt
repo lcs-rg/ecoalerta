@@ -1,0 +1,9 @@
+Equipe EcoAlerta - Global Solution 2026.2
+
+Integrantes e RMs:
+Lucas Rocha Guerra - RM 576845
+Felipe Alves Costa - RM 576247
+Rodrigo Aljonas de Lima - RM 576916
+Enzo Bertola Coraine - RM 574390
+
+Repositorio: https://github.com/lcs-rg/ecoalerta
