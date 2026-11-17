@@ -1,27 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
 /* ============================================================
-   EcoAlerta — identidade "sinalização de defesa civil"
-   Paleta de 3 cores: #000000, #FFFFFF e #CBF615
-   Tons intermediários só via opacidade do branco.
-   A escala de risco é codificada por intensidade do acento.
+   EcoAlerta — identidade "boletim meteorológico + sirene"
+   Paleta de 3 cores: #081B40 (tempestade), #FBE8CF (papel),
+   #FDAC2F (alarme). Tons intermediários só via opacidade.
+   Regra de contraste: o laranja nunca é texto sobre creme —
+   aparece como preenchimento, borda ou sobre o navy.
+   A escala de risco é codificada por intensidade do alarme.
    ============================================================ */
 
 :root {
-  --tempestade: #000000;   /* fundo base */
-  --tinta: #FFFFFF;        /* texto */
-  --papel: #000000;        /* fundo da página */
-  --branco: #FFFFFF;
-  --agua: #CBF615;         /* água / links */
-  --sirene: #CBF615;       /* acento único de alta visibilidade */
-  --emergencia: #CBF615;   /* alarmes (mesmo acento) */
+  --tempestade: #081B40;   /* navy do céu de tempestade */
+  --tinta: #081B40;        /* texto sobre o papel */
+  --papel: #FBE8CF;        /* creme do boletim (fundo da página) */
+  --branco: #FBE8CF;       /* placas */
+  --agua: #FDAC2F;         /* acento de água/alerta */
+  --sirene: #FDAC2F;       /* alarme de alta visibilidade */
+  --emergencia: #FDAC2F;
 
   --fonte-sinal: 'Allerta Stencil', sans-serif;
   --fonte-texto: 'Archivo', sans-serif;
   --fonte-dado: 'IBM Plex Mono', monospace;
 
-  /* Faixa de sinalização (ácido/preto) */
-  --faixa: repeating-linear-gradient(-45deg, var(--sirene) 0 12px, #000000 12px 24px);
+  /* Faixa de sinalização (laranje/navy) */
+  --faixa: repeating-linear-gradient(-45deg, var(--sirene) 0 12px, var(--tempestade) 12px 24px);
 }
 
 /* ===== Base ===== */
@@ -45,22 +47,27 @@ img {
 
 ::selection {
   background: var(--sirene);
-  color: #000000;
+  color: var(--tempestade);
 }
 
 a, a:link, a:visited {
-  color: var(--agua);
-  text-decoration: none;
+  color: var(--tinta);
+  text-decoration: underline;
+  text-decoration-color: rgba(8, 27, 64, 0.35);
 }
 
 a:hover {
-  color: var(--sirene);
-  text-decoration: underline;
+  color: var(--tempestade);
+  text-decoration-color: var(--sirene);
 }
 
 a:focus-visible, button:focus-visible, input:focus-visible {
   outline: 3px solid var(--sirene);
   outline-offset: 2px;
+}
+
+.hero a, .footer a {
+  text-decoration-color: rgba(251, 232, 207, 0.4);
 }
 
 /* ===== Barra de nível (mobile) ===== */
@@ -92,8 +99,8 @@ a:focus-visible, button:focus-visible, input:focus-visible {
     top: 0;
     bottom: 0;
     width: 64px;
-    background: #000000;
-    border-right: 1px solid rgba(255, 255, 255, 0.15);
+    background: var(--tempestade);
+    border-right: 1px solid rgba(251, 232, 207, 0.2);
     z-index: 20;
     flex-direction: column;
     align-items: center;
@@ -115,7 +122,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   flex: 1;
   width: 16px;
   margin: 1rem 0;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(251, 232, 207, 0.15);
 }
 
 /* marcas da régua */
@@ -123,7 +130,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   content: "";
   position: absolute;
   inset: 0;
-  background: repeating-linear-gradient(180deg, transparent 0 12px, rgba(255, 255, 255, 0.35) 12px 13px);
+  background: repeating-linear-gradient(180deg, transparent 0 12px, rgba(251, 232, 207, 0.4) 12px 13px);
 }
 
 .gauge-agua {
@@ -145,7 +152,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   font-size: 0.55rem;
   font-weight: 600;
   background: var(--sirene);
-  color: #000000;
+  color: var(--tempestade);
   padding: 1px 4px;
   white-space: nowrap;
 }
@@ -166,10 +173,10 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(251, 232, 207, 0.7);
 }
 
-/* o nível atual acende em ácido */
+/* o nível atual acende no alarme */
 .gauge[data-nivel="normal"]     .gauge-niveis .nivel-normal,
 .gauge[data-nivel="atencao"]    .gauge-niveis .nivel-atencao,
 .gauge[data-nivel="alerta"]     .gauge-niveis .nivel-alerta,
@@ -182,9 +189,8 @@ header {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: #000000;
+  background: var(--papel);
   padding: 1rem 1.25rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 /* faixa de sinalização sob o header */
@@ -214,7 +220,7 @@ header::after {
 
 .logo:hover {
   text-decoration: none;
-  color: var(--sirene);
+  color: var(--tinta);
 }
 
 nav ul {
@@ -235,16 +241,18 @@ nav a {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--tinta);
+  text-decoration: none;
 }
 
 nav a:hover {
   text-decoration: none;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(8, 27, 64, 0.08);
 }
 
 /* seção atual em destaque (scrollspy) */
 nav a.ativo {
-  color: var(--sirene);
+  color: var(--tempestade);
+  background: rgba(253, 172, 47, 0.25);
 }
 
 nav a.ativo::after {
@@ -257,7 +265,7 @@ nav a.ativo::after {
   background: var(--sirene);
 }
 
-/* ===== Hero ===== */
+/* ===== Hero (zona de tempestade) ===== */
 .hero {
   position: relative;
   overflow: hidden;
@@ -268,9 +276,8 @@ nav a.ativo::after {
   text-align: center;
   min-height: 88vh;
   padding: 4rem 1.25rem;
-  background: #000000;
+  background: var(--tempestade);
   color: var(--branco);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 /* chuva em duas camadas de traços caindo */
@@ -282,12 +289,12 @@ nav a.ativo::after {
 }
 
 .chuva::before {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='160'%3E%3Cline x1='28' y1='0' x2='28' y2='30' stroke='rgba(255,255,255,0.35)' stroke-width='2'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='160'%3E%3Cline x1='28' y1='0' x2='28' y2='30' stroke='rgba(251,232,207,0.4)' stroke-width='2'/%3E%3C/svg%3E");
   animation: cair 0.9s linear infinite;
 }
 
 .chuva::after {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='220'%3E%3Cline x1='20' y1='0' x2='20' y2='22' stroke='rgba(203,246,21,0.25)' stroke-width='2'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='220'%3E%3Cline x1='20' y1='0' x2='20' y2='22' stroke='rgba(253,172,47,0.3)' stroke-width='2'/%3E%3C/svg%3E");
   animation: cair 1.5s linear infinite;
 }
 
@@ -320,19 +327,20 @@ nav a.ativo::after {
   font-weight: 400;
   font-size: clamp(3rem, 9vw, 5rem);
   letter-spacing: 0.02em;
+  color: var(--branco);
 }
 
 .hero-lead {
   max-width: 44ch;
   font-size: 1.15rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(251, 232, 207, 0.9);
 }
 
 .hero-frase {
   max-width: 40ch;
   font-family: var(--fonte-dado);
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(251, 232, 207, 0.65);
 }
 
 /* leitura do sensor (dados simulados) */
@@ -349,10 +357,10 @@ nav a.ativo::after {
   font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: rgba(255, 255, 255, 0.7);
-  background: rgba(255, 255, 255, 0.08);
+  color: rgba(251, 232, 207, 0.75);
+  background: rgba(251, 232, 207, 0.08);
   padding: 0.45rem 0.8rem;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(251, 232, 207, 0.25);
 }
 
 .leitura-item b {
@@ -365,7 +373,7 @@ nav a.ativo::after {
   font-size: 0.62rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(251, 232, 207, 0.5);
 }
 
 .hero-acoes {
@@ -384,6 +392,7 @@ nav a.ativo::after {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
+  text-decoration: none;
   transition: transform 0.15s, background-color 0.15s, border-color 0.15s, color 0.15s;
 }
 
@@ -394,16 +403,16 @@ nav a.ativo::after {
 
 .botao-primario {
   background: var(--sirene);
-  color: #000000;
+  color: var(--tempestade);
 }
 
 .botao-primario:hover {
-  background: #A9C50E;
-  color: #000000;
+  background: #E0941C;
+  color: var(--tempestade);
 }
 
 .botao-fantasma {
-  border: 2px solid rgba(255, 255, 255, 0.5);
+  border: 2px solid rgba(251, 232, 207, 0.55);
   color: var(--branco);
 }
 
@@ -412,7 +421,7 @@ nav a.ativo::after {
   color: var(--sirene);
 }
 
-/* ===== Seções ===== */
+/* ===== Seções (papel do boletim) ===== */
 section {
   padding: 4rem 1.25rem;
   scroll-margin-top: 90px;
@@ -437,12 +446,23 @@ section {
 }
 
 .tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   font-family: var(--fonte-dado);
   font-size: 0.68rem;
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--sirene);
+  color: var(--tinta);
+}
+
+/* marcador do alarme junto à etiqueta */
+.tag::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background: var(--sirene);
 }
 
 section h2 {
@@ -480,8 +500,8 @@ section > p {
 .fluxo li {
   flex: 1 1 200px;
   max-width: 230px;
-  background: #000000;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: var(--branco);
+  border: 1px solid rgba(8, 27, 64, 0.25);
   border-top: 4px solid var(--sirene);
   padding: 1.25rem;
   text-align: center;
@@ -492,7 +512,11 @@ section > p {
   font-family: var(--fonte-dado);
   font-size: 1.6rem;
   font-weight: 600;
-  color: var(--sirene);
+  color: var(--tinta);
+  border-bottom: 4px solid var(--sirene);
+  width: fit-content;
+  margin: 0 auto 0.35rem;
+  padding-bottom: 0.1rem;
 }
 
 .fluxo h3 {
@@ -505,10 +529,10 @@ section > p {
 
 .fluxo p {
   font-size: 0.88rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(8, 27, 64, 0.75);
 }
 
-/* ===== Escala de risco (intensidade crescente) ===== */
+/* ===== Escala de risco (intensidade crescente do alarme) ===== */
 .escala {
   display: flex;
   flex-wrap: wrap;
@@ -525,17 +549,17 @@ section > p {
   text-transform: uppercase;
   letter-spacing: 0.12em;
   padding: 0.5rem 1rem;
-  background: #000000;
+  background: var(--branco);
   color: var(--tinta);
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(8, 27, 64, 0.35);
   border-left: 6px solid var(--sirene);
 }
 
 .nivel-atencao    { border-color: var(--sirene); border-left-width: 6px; }
-.nivel-alerta     { color: var(--sirene); border-color: var(--sirene); border-left-width: 6px; }
-.nivel-emergencia { background: var(--sirene); color: #000000; border-color: var(--sirene); border-left-color: #000000; }
+.nivel-alerta     { background: var(--sirene); color: var(--tempestade); border-color: var(--sirene); border-left-color: var(--tempestade); }
+.nivel-emergencia { background: var(--tempestade); color: var(--sirene); border-color: var(--tempestade); border-left-color: var(--sirene); }
 
-/* ===== Cards (placas) ===== */
+/* ===== Cards (placas do boletim) ===== */
 .cards {
   display: flex;
   flex-direction: column;
@@ -546,8 +570,8 @@ section > p {
 }
 
 .card {
-  background: #000000;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: var(--branco);
+  border: 1px solid rgba(8, 27, 64, 0.25);
   border-top: 4px solid var(--sirene);
   padding: 1.5rem;
   text-align: center;
@@ -572,7 +596,7 @@ section > p {
 
 .card p {
   font-size: 0.92rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(8, 27, 64, 0.75);
 }
 
 /* ===== Formulário (ficha) ===== */
@@ -582,8 +606,8 @@ section > p {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  background: #000000;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: var(--branco);
+  border: 1px solid rgba(8, 27, 64, 0.25);
   border-top: 4px solid var(--sirene);
   padding: 1.75rem;
 }
@@ -601,11 +625,11 @@ section > p {
 #formulario input {
   width: 100%;
   padding: 0.65rem;
-  border: 2px solid rgba(255, 255, 255, 0.35);
+  border: 2px solid rgba(8, 27, 64, 0.35);
   border-radius: 0;
   font-family: var(--fonte-texto);
   font-size: 1rem;
-  background: #000000;
+  background: var(--branco);
   color: var(--tinta);
 }
 
@@ -618,7 +642,7 @@ section > p {
   padding: 0.85rem;
   border: none;
   background: var(--sirene);
-  color: #000000;
+  color: var(--tempestade);
   font-family: var(--fonte-dado);
   font-weight: 600;
   font-size: 0.9rem;
@@ -629,19 +653,25 @@ section > p {
 }
 
 #formulario button:hover {
-  background: #A9C50E;
+  background: #E0941C;
 }
 
 #formulario .nota-dados {
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(8, 27, 64, 0.55);
 }
 
 /* estados criados pela validação em JavaScript */
 .erro {
   display: block;
   font-family: var(--fonte-dado);
-  font-size: 0.75rem;
-  color: var(--sirene);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: var(--sirene);
+  color: var(--tempestade);
+  padding: 0.15rem 0.5rem;
+  width: fit-content;
 }
 
 .campo-invalido {
@@ -652,16 +682,18 @@ section > p {
   font-family: var(--fonte-dado);
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--sirene);
-  text-align: center;
+  color: var(--tinta);
+  border-left: 4px solid var(--sirene);
+  padding-left: 0.5rem;
+  text-align: left;
 }
 
 /* ===== Slideshow (registro de monitoramento) ===== */
 .slideshow {
   max-width: 640px;
   margin: 2.5rem auto 0;
-  background: #000000;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: var(--tempestade);
+  border: 1px solid rgba(8, 27, 64, 0.35);
 }
 
 .slide-janela {
@@ -683,7 +715,7 @@ section > p {
   top: 50%;
   transform: translateY(-50%);
   border: none;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(251, 232, 207, 0.15);
   color: var(--branco);
   font-size: 1.2rem;
   padding: 0.6rem 0.85rem;
@@ -693,7 +725,7 @@ section > p {
 
 .slide-btn:hover {
   background: var(--sirene);
-  color: #000000;
+  color: var(--tempestade);
 }
 
 .slide-anterior {
@@ -713,21 +745,20 @@ section > p {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(251, 232, 207, 0.85);
   padding: 0.6rem 0.9rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  border-top: 1px solid rgba(251, 232, 207, 0.25);
 }
 
 .slide-barra b {
   color: var(--sirene);
 }
 
-/* ===== Rodapé ===== */
+/* ===== Rodapé (zona de tempestade) ===== */
 footer {
-  background: #000000;
+  background: var(--tempestade);
   color: var(--papel);
   padding: 2.5rem 1.25rem 1.25rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 /* faixa de sinalização no topo do rodapé */
@@ -755,7 +786,7 @@ footer::before {
 
 .footer-coluna p {
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(251, 232, 207, 0.75);
 }
 
 .footer-coluna h3 {
@@ -773,8 +804,9 @@ footer::before {
 }
 
 .footer-coluna a {
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(251, 232, 207, 0.9);
   font-size: 0.9rem;
+  text-decoration: none;
 }
 
 .footer-coluna a:hover {
@@ -786,7 +818,7 @@ footer::before {
   font-family: var(--fonte-dado);
   font-size: 0.72rem;
   margin-top: 2rem;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(251, 232, 207, 0.55);
 }
 
 /* ===== Responsividade (mobile-first) ===== */

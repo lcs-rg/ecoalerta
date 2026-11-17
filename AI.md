@@ -18,6 +18,7 @@
 4. *"Redesenhe a landing page EcoAlerta seguindo princípios de design autoral: identidade inspirada em sinalização de defesa civil e régua limnimétrica (régua de nível de água), paleta tempestade/papel/sirene, tipografia Allerta Stencil + Archivo + IBM Plex Mono, assinatura de régua de risco que sobe com o scroll, scrollspy no menu, chuva animada no hero (respeitando prefers-reduced-motion), mantendo os requisitos do edital FIAP (Flexbox, variáveis CSS, Google Fonts, textos curtos) e o conteúdo escrito pelo integrante."*
 5. *"Expanda o js/script.js com a régua de risco (gauge) atualizada por scroll, barra de nível no mobile, scrollspy no menu e leitura simulada do sensor no hero."*
 6. *"Teste de paleta solicitado pelo grupo: reconstruir a identidade usando apenas 3 cores (#000000, #FFFFFF, #CBF615), recolorindo todos os SVGs e codificando a escala de risco por intensidade do acento (contorno branco → contorno ácido → texto ácido → fundo ácido) já que uma única cor não codifica 4 níveis."*
+7. *"Segundo teste de paleta solicitado pelo grupo: 3 cores (#081B40 tempestade, #FBE8CF papel de boletim, #FDAC2F alarme) — página clara com zonas de tempestade navy no hero/régua/rodapé, recolorindo os SVGs (ícones navy sobre creme, slides claros sobre navy) e regraduando a escala de risco por intensidade com regra de contraste: laranja nunca como texto sobre creme."*
 
 ## Funcionalidades desenvolvidas com auxílio de IA
 
