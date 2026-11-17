@@ -235,6 +235,17 @@ section p {
   font-size: 0.875rem;
 }
 
+/* Estados criados pela validação em JavaScript */
+.campo-invalido {
+  border-color: var(--cor-perigo) !important;
+}
+
+.sucesso {
+  color: var(--cor-primaria);
+  font-weight: 600;
+  text-align: center;
+}
+
 /* ===== Slideshow ===== */
 .slideshow {
   position: relative;
