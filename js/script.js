@@ -1,8 +1,8 @@
 /* ============================================================
    EcoAlerta — script.js
    Slideshow (3 imagens), validação do formulário, régua de
-   risco ligada ao scroll e leitura simulada do sensor.
-   JavaScript puro (ES6+), sem frameworks.
+   risco ligada ao scroll, leitura simulada do sensor e painel
+   de monitoramento. JavaScript puro (ES6+), sem frameworks.
    ============================================================ */
 
 // Respeita a preferência do usuário por menos movimento
@@ -168,36 +168,81 @@ window.addEventListener('scroll', atualizarNivel, { passive: true });
 window.addEventListener('resize', atualizarNivel);
 atualizarNivel();
 
-/* ===== Leitura simulada do sensor (hero) ===== */
+/* ===== Leitura simulada do sensor (hero + painel) ===== */
 
-// Valores fictícios para demonstração (declarados na página)
+// Escala da régua do painel: 0 a 2 m (marcador = metros / 2)
+const ESCALA_MAXIMA = 2;
+
+// Valores fictícios para demonstração (declarados na página).
+// Limites da escala: Normal < 0,5 m | Atenção 0,5–1,0 m |
+// Alerta 1,0–1,5 m | Emergência 1,5 m ou mais.
 const LEITURAS = [
-  { chuva: '38 mm/h', nivel: '0,42 m', status: 'atencao' },
-  { chuva: '45 mm/h', nivel: '0,49 m', status: 'alerta' },
-  { chuva: '33 mm/h', nivel: '0,40 m', status: 'atencao' },
-  { chuva: '27 mm/h', nivel: '0,34 m', status: 'normal' },
-  { chuva: '41 mm/h', nivel: '0,46 m', status: 'atencao' },
+  { chuva: '33 mm/h', nivel: '0,38 m', metros: 0.38, status: 'normal' },
+  { chuva: '45 mm/h', nivel: '0,87 m', metros: 0.87, status: 'atencao' },
+  { chuva: '52 mm/h', nivel: '1,12 m', metros: 1.12, status: 'alerta' },
+  { chuva: '27 mm/h', nivel: '0,64 m', metros: 0.64, status: 'atencao' },
+  { chuva: '38 mm/h', nivel: '0,42 m', metros: 0.42, status: 'normal' },
 ];
 
 const leituraChuva = document.querySelector('#leitura-chuva');
 const leituraNivel = document.querySelector('#leitura-nivel');
 const leituraStatus = document.querySelector('#leitura-status');
+const painelNivel = document.querySelector('#painel-nivel');
+const painelStatus = document.querySelector('#painel-status');
+const painelMarcador = document.querySelector('#painel-marcador');
+const painelHora = document.querySelector('#painel-hora');
 
 let leituraIndice = 0;
 
-// Troca os valores exibidos para o próximo registro da lista
+// Formata a hora atual (a última leitura chegou "agora")
+function horaAtual() {
+  return new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+}
+
+// Troca os valores exibidos no hero e no painel de monitoramento
 function atualizarLeitura() {
   const leitura = LEITURAS[leituraIndice % LEITURAS.length];
+  const nomeStatus = leitura.status.charAt(0).toUpperCase() + leitura.status.slice(1);
+
+  // Painel compacto do hero
   leituraChuva.textContent = leitura.chuva;
   leituraNivel.textContent = leitura.nivel;
-  leituraStatus.textContent = leitura.status.charAt(0).toUpperCase() + leitura.status.slice(1);
+  leituraStatus.textContent = nomeStatus;
   leituraStatus.dataset.nivel = leitura.status;
+
+  // Painel operacional da seção Monitoramento
+  painelNivel.textContent = leitura.nivel;
+  painelStatus.textContent = nomeStatus;
+  painelStatus.dataset.nivel = leitura.status;
+  painelMarcador.style.left = (leitura.metros / ESCALA_MAXIMA * 100).toFixed(1) + '%';
+  painelHora.textContent = horaAtual();
+
   leituraIndice++;
 }
 
 atualizarLeitura();
 
-// A leitura "pulsa" a cada 2,5 s (desligada se o usuário pediu menos movimento)
+// A leitura "pulsa" a cada 4 s (desligada se o usuário pediu menos movimento)
 if (!reduzirMovimento) {
-  setInterval(atualizarLeitura, 2500);
+  setInterval(atualizarLeitura, 4000);
+}
+
+/* ===== Entrada dos elementos durante o scroll ===== */
+
+const alvosRevelar = document.querySelectorAll('.revelar');
+
+// Com movimento reduzido, tudo já aparece pronto
+if (reduzirMovimento) {
+  alvosRevelar.forEach((alvo) => alvo.classList.add('visivel'));
+} else {
+  const observador = new IntersectionObserver((entradas) => {
+    entradas.forEach((entrada) => {
+      if (entrada.isIntersecting) {
+        entrada.target.classList.add('visivel');
+        observador.unobserve(entrada.target); // anima apenas uma vez
+      }
+    });
+  }, { threshold: 0.15 });
+
+  alvosRevelar.forEach((alvo) => observador.observe(alvo));
 }

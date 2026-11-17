@@ -22,6 +22,7 @@
         <li><a href="#objetivos">Objetivos</a></li>
         <li><a href="#publico">Público-alvo</a></li>
         <li><a href="#beneficios">Benefícios</a></li>
+        <li><a href="#monitoramento">Monitoramento</a></li>
         <li><a href="#formulario">Cadastre-se</a></li>
       </ul>
     </nav>
@@ -49,21 +50,73 @@
           <h1>EcoAlerta</h1>
           <p class="hero-lead">Monitoramento do nível da água e alertas em áreas de risco.</p>
           <p class="hero-frase">Não podemos impedir a chuva. Podemos ajudar a cidade a se preparar.</p>
-          <div class="leitura">
-            <span class="leitura-item">Chuva <b id="leitura-chuva">38 mm/h</b></span>
-            <span class="leitura-item">Nível <b id="leitura-nivel">0,42 m</b></span>
-            <span class="leitura-item">Status <b id="leitura-status" data-nivel="atencao">Atenção</b></span>
+          <div class="hero-painel">
+            <span>Sistema <b class="ativo">Ativo</b></span>
+            <span>Ponto 001</span>
+            <span>Chuva <b id="leitura-chuva">33 mm/h</b></span>
+            <span>Nível <b id="leitura-nivel">0,38 m</b></span>
+            <span>Status <b id="leitura-status" class="chip" data-nivel="normal">Normal</b></span>
           </div>
           <p class="nota-dados">Leitura simulada para demonstração.</p>
           <div class="hero-acoes">
-            <a href="#formulario" class="botao botao-primario">Quero receber alertas</a>
+            <a href="#monitoramento" class="botao botao-primario">Acompanhar monitoramento</a>
             <a href="#problema" class="botao botao-fantasma">Entender o problema</a>
           </div>
         </div>
-        <div class="hero-moldura">
+        <div class="hero-cena-wrap">
+          <span class="cena-tag">EA-001 · Posto de monitoramento</span>
           <img class="hero-cena" src="img/hero-cidade-3d.webp" alt="Cena 3D isométrica de uma rua de São Paulo alagada, com o posto de monitoramento EcoAlerta equipado com sensor, sirene e painel solar, e a régua de nível da água marcando de 1 a 4 metros">
+          <span class="cena-faixa" aria-hidden="true"></span>
         </div>
       </div>
+    </section>
+
+    <section id="monitoramento">
+      <div class="cabeca">
+        <span class="tag">Estação hidrológica · Demonstração</span>
+        <h2>Monitoramento</h2>
+      </div>
+      <div class="painel revelar">
+        <div class="painel-topo">
+          <span>EcoAlerta / Monitoramento</span>
+          <span class="painel-sistema"><i class="ponto-ativo" aria-hidden="true"></i>Sistema ativo</span>
+        </div>
+        <div class="painel-corpo">
+          <div class="painel-medicao">
+            <div>
+              <span class="painel-rotulo">Nível do rio · Ponto 001</span>
+              <span class="painel-valor" id="painel-nivel">0,38 m</span>
+            </div>
+            <b id="painel-status" class="chip" data-nivel="normal">Normal</b>
+          </div>
+          <div class="painel-regua" aria-hidden="true">
+            <ul>
+              <li class="zona-normal"></li>
+              <li class="zona-atencao"></li>
+              <li class="zona-alerta"></li>
+              <li class="zona-emergencia"></li>
+            </ul>
+            <span class="painel-marcador" id="painel-marcador"></span>
+          </div>
+          <ul class="painel-escala" aria-hidden="true">
+            <li>0,0 m</li>
+            <li>0,5 m</li>
+            <li>1,0 m</li>
+            <li>1,5 m</li>
+            <li>2,0 m</li>
+          </ul>
+          <div class="painel-info">
+            <span>Sensor ativo</span>
+            <span>Última leitura <b id="painel-hora">--:--</b></span>
+          </div>
+          <div class="painel-contadores">
+            <span class="contador"><b>12</b>Sensores ativos</span>
+            <span class="contador"><b>8</b>Pontos monitorados</span>
+            <span class="contador"><b>3</b>Alertas emitidos</span>
+          </div>
+        </div>
+      </div>
+      <p class="nota-dados nota-central">Dados de demonstração. Integração real com os sensores na fase final do projeto.</p>
     </section>
 
     <section id="problema">
@@ -71,8 +124,9 @@
         <span class="tag">Alerta ativo · Nível subindo</span>
         <h2>Problema</h2>
       </div>
-      <div class="cena-problema">
+      <div class="cena-problema revelar">
         <img src="img/problema-cena.webp" alt="Cena 3D isométrica de uma avenida de São Paulo alagada pela chuva, com carro parado na água e posto de monitoramento EcoAlerta ao lado da régua de nível">
+        <span class="cena-faixa" aria-hidden="true"></span>
       </div>
       <p>Enchentes e alagamentos tomam as ruas de São Paulo a cada chuva forte.</p>
       <p>Falta comunicação rápida entre Defesa Civil e moradores de áreas de risco.</p>
@@ -83,26 +137,28 @@
         <span class="tag">Sinal do sensor · Ativo</span>
         <h2>Tecnologia</h2>
       </div>
-      <img src="img/icones/sensor.svg" alt="Ícone de sensor eletrônico emitindo sinal">
+      <div class="placa revelar" data-id="EA-T01">
+        <img src="img/icones/sensor.svg" alt="Ícone de sensor eletrônico emitindo sinal">
+      </div>
       <p>Arduino e sensor de nível de água monitoram os pontos de risco.</p>
       <p>Python classifica o perigo e a página web informa a população.</p>
       <ol class="fluxo">
-        <li>
+        <li class="revelar">
           <span class="fluxo-num">01</span>
           <h3>Monitorar</h3>
           <p>Sensor acompanha o nível da água.</p>
         </li>
-        <li>
+        <li class="revelar">
           <span class="fluxo-num">02</span>
           <h3>Identificar</h3>
           <p>Limites definidos classificam a situação.</p>
         </li>
-        <li>
+        <li class="revelar">
           <span class="fluxo-num">03</span>
           <h3>Alertar</h3>
           <p>LEDs e buzzer sinalizam o risco no local.</p>
         </li>
-        <li>
+        <li class="revelar">
           <span class="fluxo-num">04</span>
           <h3>Informar</h3>
           <p>Esta página apresenta os dados à cidade.</p>
@@ -115,15 +171,28 @@
         <span class="tag">Escala de risco oficial</span>
         <h2>Objetivos</h2>
       </div>
-      <img src="img/icones/alvo.svg" alt="Ícone de alvo com seta no centro">
       <p>Monitorar o nível da água e classificar em Normal, Atenção, Alerta ou Emergência.</p>
       <p>Avisar os moradores com antecedência para reduzir riscos e perdas.</p>
-      <ul class="escala">
-        <li class="nivel-normal">Normal</li>
-        <li class="nivel-atencao">Atenção</li>
-        <li class="nivel-alerta">Alerta</li>
-        <li class="nivel-emergencia">Emergência</li>
-      </ul>
+      <div class="regua-ampla revelar" aria-hidden="true">
+        <ul class="regua-niveis">
+          <li>Emergência</li>
+          <li>Alerta</li>
+          <li>Atenção</li>
+          <li>Normal</li>
+        </ul>
+        <div class="regua-trilho"></div>
+        <ul class="regua-marcas">
+          <li>4,0 m</li>
+          <li>3,5 m</li>
+          <li>3,0 m</li>
+          <li>2,5 m</li>
+          <li>2,0 m</li>
+          <li>1,5 m</li>
+          <li>1,0 m</li>
+          <li>0,5 m</li>
+          <li>0,0 m</li>
+        </ul>
+      </div>
     </section>
 
     <section id="publico">
@@ -132,17 +201,20 @@
         <h2>Público-alvo</h2>
       </div>
       <ul class="cards">
-        <li class="card">
+        <li class="card revelar">
+          <span class="card-id">EA-P01</span>
           <img src="img/icones/moradores.svg" alt="Ícone de grupo de moradores">
           <h3>Moradores de áreas de risco</h3>
           <p>Recebem alertas e sabem quando agir.</p>
         </li>
-        <li class="card">
+        <li class="card revelar">
+          <span class="card-id">EA-P02</span>
           <img src="img/icones/motorista.svg" alt="Ícone de motorista em um veículo">
           <h3>Motoristas e motociclistas</h3>
           <p>Evitam ruas alagadas e pontos de alagamento.</p>
         </li>
-        <li class="card">
+        <li class="card revelar">
+          <span class="card-id">EA-P03</span>
           <img src="img/icones/pedestre.svg" alt="Ícone de pedestre caminhando">
           <h3>Pedestres e entregadores</h3>
           <p>Encontram rotas seguras no dia a dia.</p>
@@ -156,22 +228,26 @@
         <h2>Benefícios</h2>
       </div>
       <ul class="cards">
-        <li class="card">
+        <li class="card revelar">
+          <span class="card-id">EA-B01</span>
           <img src="img/icones/tempo.svg" alt="Ícone de relógio marcando tempo">
           <h3>Tempo para evacuar</h3>
           <p>Alertas chegam antes da água subir.</p>
         </li>
-        <li class="card">
+        <li class="card revelar">
+          <span class="card-id">EA-B02</span>
           <img src="img/icones/rota.svg" alt="Ícone de seta indicando rota alternativa">
           <h3>Rotas seguras</h3>
           <p>Moradores e motoristas evitam pontos alagados.</p>
         </li>
-        <li class="card">
+        <li class="card revelar">
+          <span class="card-id">EA-B03</span>
           <img src="img/icones/defesa.svg" alt="Ícone de escudo com selo de verificação">
           <h3>Apoio à Defesa Civil</h3>
           <p>Dados locais reforçam a resposta oficial.</p>
         </li>
-        <li class="card">
+        <li class="card revelar">
+          <span class="card-id">EA-B04</span>
           <img src="img/icones/ods.svg" alt="Ícone de globo representando os ODS da ONU">
           <h3>ODS 11 e ODS 13</h3>
           <p>Cidades sustentáveis e ação climática.</p>
@@ -201,7 +277,7 @@
         <p class="nota-dados">Dados usados apenas para demonstração do projeto.</p>
       </form>
 
-      <figure class="slideshow">
+      <figure class="slideshow revelar">
         <div class="slide-janela">
           <img src="img/slide1.webp" alt="Cena 3D de viaduto alagado em São Paulo, com carro atravessando e régua de nível marcando risco de enchente" class="slide ativo">
           <img src="img/slide2.webp" alt="Cena 3D de esquina alagada com a estação de monitoramento EcoAlerta e régua marcando os níveis Normal, Atenção, Alerta e Emergência" class="slide">
@@ -211,7 +287,7 @@
         </div>
         <figcaption class="slide-barra">
           <span>Registro <b id="slide-num">01</b>/03</span>
-          <span>Câmera · ponto de monitoramento</span>
+          <span>Registro de campo · Ponto 001</span>
         </figcaption>
       </figure>
     </section>
@@ -231,6 +307,7 @@
           <li><a href="#objetivos">Objetivos</a></li>
           <li><a href="#publico">Público-alvo</a></li>
           <li><a href="#beneficios">Benefícios</a></li>
+          <li><a href="#monitoramento">Monitoramento</a></li>
           <li><a href="#formulario">Cadastre-se</a></li>
         </ul>
       </div>
