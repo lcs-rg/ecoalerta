@@ -1,17 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
   <defs>
     <linearGradient id="ceu3" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#f2a007"/>
-      <stop offset="1" stop-color="#d64545"/>
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#CBF615"/>
     </linearGradient>
   </defs>
   <rect width="800" height="450" fill="url(#ceu3)"/>
   <g transform="translate(400 190)">
-    <rect x="-45" y="-85" width="90" height="150" rx="14" fill="#1d2b3a"/>
-    <rect x="-33" y="-70" width="66" height="100" rx="6" fill="#f4f8fb"/>
-    <path d="M0 -40 l-4 8 h8 z" fill="#f2a007"/>
-    <rect x="-10" y="-25" width="20" height="42" rx="10" fill="#f2a007" opacity="0.4"/>
-    <text x="0" y="-60" font-family="Arial, sans-serif" font-size="12" fill="#1d2b3a" text-anchor="middle">ALERTA</text>
+    <rect x="-45" y="-85" width="90" height="150" rx="14" fill="#000000"/>
+    <rect x="-33" y="-70" width="66" height="100" rx="6" fill="#FFFFFF"/>
+    <path d="M0 -40 l-4 8 h8 z" fill="#FFFFFF"/>
+    <rect x="-10" y="-25" width="20" height="42" rx="10" fill="#FFFFFF" opacity="0.4"/>
+    <text x="0" y="-60" font-family="Arial, sans-serif" font-size="12" fill="#000000" text-anchor="middle">ALERTA</text>
   </g>
-  <text x="400" y="390" font-family="Arial, sans-serif" font-size="28" fill="#1d2b3a" text-anchor="middle">[FOTO] Alerta de emergência recebido no celular</text>
+  <text x="400" y="390" font-family="Arial, sans-serif" font-size="28" fill="#000000" text-anchor="middle">[FOTO] Alerta de emergÃªncia recebido no celular</text>
 </svg>

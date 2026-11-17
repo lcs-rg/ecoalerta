@@ -1,16 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
   <defs>
     <linearGradient id="ceu2" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#e8eef4"/>
-      <stop offset="1" stop-color="#b9c9d6"/>
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#FFFFFF"/>
     </linearGradient>
   </defs>
   <rect width="800" height="450" fill="url(#ceu2)"/>
-  <rect x="120" y="140" width="90" height="220" rx="10" fill="#1d2b3a"/>
-  <rect x="135" y="180" width="60" height="8" rx="4" fill="#f2a007"/>
-  <rect x="135" y="240" width="60" height="8" rx="4" fill="#f2a007"/>
-  <rect x="400" y="230" width="280" height="130" rx="12" fill="#0159a2"/>
-  <circle cx="660" cy="180" r="6" fill="#1d2b3a"/>
-  <path d="M660 186 v34 m0 0 l-12 12 m12 -12 l12 12" stroke="#1d2b3a" stroke-width="4" fill="none" stroke-linecap="round"/>
-  <text x="540" y="305" font-family="Arial, sans-serif" font-size="28" fill="#f4f8fb" text-anchor="middle">[FOTO] Sensor de nível de água no ponto de monitoramento</text>
+  <rect x="120" y="140" width="90" height="220" rx="10" fill="#000000"/>
+  <rect x="135" y="180" width="60" height="8" rx="4" fill="#FFFFFF"/>
+  <rect x="135" y="240" width="60" height="8" rx="4" fill="#FFFFFF"/>
+  <rect x="400" y="230" width="280" height="130" rx="12" fill="#CBF615"/>
+  <circle cx="660" cy="180" r="6" fill="#000000"/>
+  <path d="M660 186 v34 m0 0 l-12 12 m12 -12 l12 12" stroke="#000000" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <text x="540" y="305" font-family="Arial, sans-serif" font-size="28" fill="#FFFFFF" text-anchor="middle">[FOTO] Sensor de nÃ­vel de Ã¡gua no ponto de monitoramento</text>
 </svg>

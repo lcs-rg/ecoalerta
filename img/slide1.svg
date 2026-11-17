@@ -1,12 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
   <defs>
     <linearGradient id="ceu" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#5b6b7a"/>
-      <stop offset="1" stop-color="#1d2b3a"/>
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#000000"/>
     </linearGradient>
   </defs>
   <rect width="800" height="450" fill="url(#ceu)"/>
-  <path d="M0 330 Q200 300 400 330 T800 320 V450 H0 Z" fill="#0159a2" opacity="0.85"/>
-  <path d="M0 370 Q200 345 400 370 T800 365 V450 H0 Z" fill="#013a6b" opacity="0.9"/>
-  <text x="400" y="180" font-family="Arial, sans-serif" font-size="30" fill="#f4f8fb" text-anchor="middle">[FOTO] Rua alagada durante chuva forte em São Paulo</text>
+  <path d="M0 330 Q200 300 400 330 T800 320 V450 H0 Z" fill="#CBF615" opacity="0.85"/>
+  <path d="M0 370 Q200 345 400 370 T800 365 V450 H0 Z" fill="#CBF615" opacity="0.9"/>
+  <text x="400" y="180" font-family="Arial, sans-serif" font-size="30" fill="#FFFFFF" text-anchor="middle">[FOTO] Rua alagada durante chuva forte em SÃ£o Paulo</text>
 </svg>
