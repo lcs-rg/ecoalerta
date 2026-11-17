@@ -7,18 +7,22 @@
 
 | Ferramenta | Finalidade |
 |---|---|
-| opencode (assistente de código, modelo GLM) | Apoio na escrita e revisão do `js/script.js` (slideshow e validação do formulário) e nos estilos de estado (`.campo-invalido`, `.sucesso`) adicionados ao `css/style.css` |
+| opencode (assistente de código, modelo GLM) | Apoio na escrita e revisão do `js/script.js` (slideshow, validação do formulário, régua de risco por scroll e leitura simulada) e nos estilos associados do `css/style.css` |
+| opencode (assistente de código, modelo GLM) | Redesign da identidade visual da landing page (direção "sinalização de defesa civil": paleta, tipografia Allerta Stencil/Archivo/IBM Plex Mono, régua de risco lateral, faixas de sinalização, hero com chuva animada) — reescrita de `index.html`, `css/style.css` e ampliação do `js/script.js` |
 
 ## Prompts utilizados
 
 1. *"Crie o js/script.js em JavaScript puro (ES6+) para a landing page EcoAlerta: slideshow com 3 imagens usando as classes `.slide`/`.ativo` e botões `.slide-anterior`/`.slide-proximo` já existentes no HTML, e validação do formulário `#form-alerta` impedindo envio de campos vazios, com e-mail verificado por regex, mensagens de erro inline criadas via DOM e feedback de sucesso após o envio."*
 2. *"Adicione ao style.css os estilos dos estados gerados pelo JavaScript: borda vermelha para `.campo-invalido` e mensagem `.sucesso`."*
 3. *"Revise o index.html e o style.css apontando pendências contra os requisitos do edital (recursos quebrados, scroll-margin-top para header sticky)."*
+4. *"Redesenhe a landing page EcoAlerta seguindo princípios de design autoral: identidade inspirada em sinalização de defesa civil e régua limnimétrica (régua de nível de água), paleta tempestade/papel/sirene, tipografia Allerta Stencil + Archivo + IBM Plex Mono, assinatura de régua de risco que sobe com o scroll, scrollspy no menu, chuva animada no hero (respeitando prefers-reduced-motion), mantendo os requisitos do edital FIAP (Flexbox, variáveis CSS, Google Fonts, textos curtos) e o conteúdo escrito pelo integrante."*
+5. *"Expanda o js/script.js com a régua de risco (gauge) atualizada por scroll, barra de nível no mobile, scrollspy no menu e leitura simulada do sensor no hero."*
 
 ## Funcionalidades desenvolvidas com auxílio de IA
 
-- `js/script.js` (arquivo completo): lógica do slideshow (navegação circular por operador de módulo) e validação do formulário (campos vazios, formato de e-mail, erros inline, feedback de sucesso).
-- `css/style.css`: blocos `.campo-invalido` e `.sucesso` (estados visuais da validação).
+- `js/script.js` (arquivo completo): lógica do slideshow (navegação circular por operador de módulo e contador do registro), validação do formulário (campos vazios, formato de e-mail, erros inline, feedback de sucesso), régua de risco atualizada por scroll (gauge lateral, barra mobile, scrollspy no menu) e leitura simulada do sensor no hero.
+- `css/style.css`: identidade visual completa da versão "sinalização de defesa civil" (paleta, tipografia, régua, faixas, hero com chuva) e os blocos de estados da validação (`.erro`, `.campo-invalido`, `.sucesso`).
+- `index.html`: reestruturação da marcação para a nova identidade (régua, hero com chuva, etiquetas de seção, fluxo 01–04, escala de risco, barra de registro do slideshow) — **mantendo integralmente os textos e a estrutura de seções escritos pelo integrante**.
 
 ## Funcionalidades desenvolvidas sem auxílio de IA
 

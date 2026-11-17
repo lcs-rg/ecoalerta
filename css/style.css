@@ -1,17 +1,36 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+/* ============================================================
+   EcoAlerta — identidade "sinalização de defesa civil"
+   Régua limnimétrica + telemetria + faixas de alta visibilidade
+   ============================================================ */
 
 :root {
-  --cor-primaria: #0159a2;
-  --cor-primaria-escura: #013a6b;
-  --cor-alerta: #f2a007;
-  --cor-perigo: #d64545;
-  --cor-fundo: #f4f8fb;
-  --cor-texto: #1d2b3a;
-  --cor-branco: #ffffff;
-  --fonte-titulo: 'Poppins', sans-serif;
-  --fonte-texto: 'Inter', sans-serif;
+  /* Paleta do assunto: chuva, encoberto, sirene e água */
+  --tempestade: #1C2740;        /* navy do céu de tempestade */
+  --tinta: #17202F;             /* texto / faixas de sinalização */
+  --papel: #EDF1F4;             /* céu encoberto (fundo da página) */
+  --branco: #FFFFFF;            /* placas */
+  --agua: #0F6EB5;              /* água / links */
+  --sirene: #FFC61A;            /* amarelo de alta visibilidade */
+  --emergencia: #E23A2E;        /* alarme */
+
+  /* Escala oficial de risco */
+  --nivel-normal: #2E8B57;
+  --nivel-atencao: #F2B90D;
+  --nivel-alerta: #F27B13;
+  --nivel-emergencia: #E23A2E;
+
+  /* Tipografia */
+  --fonte-sinal: 'Allerta Stencil', sans-serif;  /* wordmark */
+  --fonte-texto: 'Archivo', sans-serif;
+  --fonte-dado: 'IBM Plex Mono', monospace;      /* telemetria e rótulos */
+
+  /* Faixa de sinalização (amarelo/preto) */
+  --faixa: repeating-linear-gradient(-45deg, var(--sirene) 0 12px, var(--tinta) 12px 24px);
 }
 
+/* ===== Base ===== */
 * {
   margin: 0;
   padding: 0;
@@ -20,24 +39,9 @@
 
 body {
   font-family: var(--fonte-texto);
-  color: var(--cor-texto);
-  background: var(--cor-fundo);
+  color: var(--tinta);
+  background: var(--papel);
   line-height: 1.6;
-}
-
-h1, h2, h3 {
-  font-family: var(--fonte-titulo);
-  line-height: 1.2;
-}
-
-a, a:link, a:visited {
-  color: var(--cor-primaria);
-  text-decoration: none;
-}
-
-a:hover {
-  color: var(--cor-alerta);
-  text-decoration: underline;
 }
 
 img {
@@ -45,33 +49,187 @@ img {
   display: block;
 }
 
-/* ===== Header e menu ===== */
+::selection {
+  background: var(--sirene);
+  color: var(--tinta);
+}
+
+a, a:link, a:visited {
+  color: var(--agua);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--tinta);
+  text-decoration: underline;
+}
+
+a:focus-visible, button:focus-visible, input:focus-visible {
+  outline: 3px solid var(--sirene);
+  outline-offset: 2px;
+}
+
+.hero a:focus-visible {
+  outline-color: var(--sirene);
+}
+
+/* ===== Barra de nível (mobile) ===== */
+#barra-nivel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 0;
+  z-index: 30;
+  background: var(--nivel-normal);
+  transition: width 0.1s linear, background-color 0.2s;
+}
+
+#barra-nivel[data-nivel="normal"]     { background: var(--nivel-normal); }
+#barra-nivel[data-nivel="atencao"]    { background: var(--nivel-atencao); }
+#barra-nivel[data-nivel="alerta"]     { background: var(--nivel-alerta); }
+#barra-nivel[data-nivel="emergencia"] { background: var(--nivel-emergencia); }
+
+/* ===== Régua de risco (desktop) ===== */
+.gauge {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  body {
+    padding-left: 64px;
+  }
+
+  .gauge {
+    display: flex;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 64px;
+    background: var(--tempestade);
+    z-index: 20;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0;
+  }
+}
+
+.gauge-titulo {
+  font-family: var(--fonte-dado);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sirene);
+}
+
+.gauge-trilho {
+  position: relative;
+  flex: 1;
+  width: 16px;
+  margin: 1rem 0;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* marcas da régua */
+.gauge-trilho::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(180deg, transparent 0 12px, rgba(255, 255, 255, 0.28) 12px 13px);
+}
+
+.gauge-agua {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: var(--agua);
+  transition: height 0.15s linear, background-color 0.2s;
+}
+
+.gauge[data-nivel="normal"]     .gauge-agua { background: var(--nivel-normal); }
+.gauge[data-nivel="atencao"]    .gauge-agua { background: var(--nivel-atencao); }
+.gauge[data-nivel="alerta"]     .gauge-agua { background: var(--nivel-alerta); }
+.gauge[data-nivel="emergencia"] .gauge-agua { background: var(--nivel-emergencia); }
+
+.gauge-leitura {
+  position: absolute;
+  left: 20px;
+  bottom: 0;
+  transform: translateY(50%);
+  font-family: var(--fonte-dado);
+  font-size: 0.55rem;
+  font-weight: 600;
+  background: var(--sirene);
+  color: var(--tinta);
+  padding: 1px 4px;
+  white-space: nowrap;
+}
+
+.gauge-niveis {
+  list-style: none;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 0.9rem;
+  align-items: center;
+  padding-bottom: 0.25rem;
+}
+
+.gauge-niveis li {
+  writing-mode: vertical-rl;
+  font-family: var(--fonte-dado);
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.gauge-niveis .nivel-normal     { color: #7BD9A6; }
+.gauge-niveis .nivel-atencao    { color: var(--sirene); }
+.gauge-niveis .nivel-alerta     { color: #FFB25C; }
+.gauge-niveis .nivel-emergencia { color: #FF7A66; }
+
+/* ===== Header ===== */
 header {
-  background: var(--cor-branco);
-  padding: 1rem 1.25rem;
-  box-shadow: 0 2px 6px rgba(29, 43, 58, 0.1);
   position: sticky;
   top: 0;
   z-index: 10;
+  background: var(--papel);
+  padding: 1rem 1.25rem;
+}
+
+/* faixa de sinalização sob o header */
+header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 6px;
+  background: var(--faixa);
 }
 
 .logo {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: var(--fonte-titulo);
-  font-weight: 700;
-  font-size: 1.25rem;
-  color: var(--cor-primaria);
+  font-family: var(--fonte-sinal);
+  font-size: 1.3rem;
+  color: var(--tinta);
 }
 
 .logo img {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
 }
 
 .logo:hover {
   text-decoration: none;
+  color: var(--tinta);
 }
 
 nav ul {
@@ -83,179 +241,452 @@ nav ul {
 }
 
 nav a {
+  position: relative;
   display: block;
   padding: 0.4rem 0.5rem;
+  font-family: var(--fonte-dado);
+  font-size: 0.85rem;
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--tinta);
 }
 
 nav a:hover {
   text-decoration: none;
-  background: var(--cor-fundo);
-  border-radius: 6px;
+  background: var(--branco);
+}
+
+/* seção atual em destaque (scrollspy) */
+nav a.ativo::after {
+  content: "";
+  position: absolute;
+  left: 0.5rem;
+  right: 0.5rem;
+  bottom: 3px;
+  height: 3px;
+  background: var(--sirene);
 }
 
 /* ===== Hero ===== */
 .hero {
+  position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+  min-height: 88vh;
+  padding: 4rem 1.25rem;
+  background: var(--tempestade);
+  color: var(--branco);
+}
+
+/* chuva em duas camadas de traços caindo */
+.chuva::before, .chuva::after {
+  content: "";
+  position: absolute;
+  inset: -180px 0 0 0;
+  pointer-events: none;
+}
+
+.chuva::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='160'%3E%3Cline x1='28' y1='0' x2='28' y2='30' stroke='rgba(255,255,255,0.20)' stroke-width='2'/%3E%3C/svg%3E");
+  animation: cair 0.9s linear infinite;
+}
+
+.chuva::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='220'%3E%3Cline x1='20' y1='0' x2='20' y2='22' stroke='rgba(255,255,255,0.12)' stroke-width='2'/%3E%3C/svg%3E");
+  animation: cair 1.5s linear infinite;
+}
+
+@keyframes cair {
+  to { transform: translateY(220px); }
+}
+
+.hero-conteudo {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 1rem;
-  min-height: 60vh;
-  padding: 3rem 1.25rem;
-  background: linear-gradient(180deg, var(--cor-primaria), var(--cor-primaria-escura));
-  color: var(--cor-branco);
+}
+
+.hero-tag {
+  font-family: var(--fonte-dado);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sirene);
+  border: 1px solid rgba(255, 198, 26, 0.4);
+  padding: 0.35rem 0.9rem;
 }
 
 .hero h1 {
-  font-size: 2.5rem;
+  font-family: var(--fonte-sinal);
+  font-weight: 400;
+  font-size: clamp(3rem, 9vw, 5rem);
+  letter-spacing: 0.02em;
 }
 
-.hero p {
+.hero-lead {
+  max-width: 44ch;
+  font-size: 1.15rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.hero-frase {
   max-width: 40ch;
-  font-size: 1.125rem;
+  font-family: var(--fonte-dado);
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* leitura do sensor (dados simulados) */
+.leitura {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.leitura-item {
+  font-family: var(--fonte-dado);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.45rem 0.8rem;
+}
+
+.leitura-item b {
+  font-weight: 600;
+  color: var(--sirene);
+}
+
+.leitura-item b[data-nivel="normal"]     { color: #7BD9A6; }
+.leitura-item b[data-nivel="atencao"]    { color: var(--sirene); }
+.leitura-item b[data-nivel="alerta"]     { color: #FFB25C; }
+.leitura-item b[data-nivel="emergencia"] { color: #FF7A66; }
+
+.nota-dados {
+  font-family: var(--fonte-dado);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.hero-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.botao {
+  display: inline-block;
+  padding: 0.85rem 1.5rem;
+  font-family: var(--fonte-dado);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: transform 0.15s, background-color 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.botao:hover {
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+
+.botao-primario {
+  background: var(--sirene);
+  color: var(--tinta);
+}
+
+.botao-primario:hover {
+  background: #E8B50E;
+  color: var(--tinta);
+}
+
+.botao-fantasma {
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  color: var(--branco);
+}
+
+.botao-fantasma:hover {
+  border-color: var(--sirene);
+  color: var(--sirene);
 }
 
 /* ===== Seções ===== */
 section {
-  padding: 3rem 1.25rem;
-  scroll-margin-top: 90px; /* evita que o header fixo cubra o topo da seção */
+  padding: 4rem 1.25rem;
+  scroll-margin-top: 90px;
 }
 
-section h2 {
-  font-size: 1.75rem;
-  color: var(--cor-primaria);
-  margin-bottom: 1rem;
+.cabeca {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.75rem;
   text-align: center;
 }
 
-section img {
-  margin: 0 auto 1rem;
+/* faixa de sinalização acima de cada título */
+.cabeca::before {
+  content: "";
+  display: block;
   width: 64px;
+  height: 6px;
+  background: var(--faixa);
 }
 
-section p {
+.tag {
+  font-family: var(--fonte-dado);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--agua);
+}
+
+/* o assunto determina a cor de cada etiqueta */
+#problema .tag   { color: var(--emergencia); }
+#tecnologia .tag { color: var(--agua); }
+#objetivos .tag  { color: var(--nivel-alerta); }
+#publico .tag,
+#beneficios .tag { color: var(--tinta); }
+#formulario .tag { color: var(--agua); }
+
+section h2 {
+  font-family: var(--fonte-texto);
+  font-weight: 700;
+  font-size: 1.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--tinta);
+}
+
+section > img {
+  width: 56px;
+  margin: 0 auto 1.25rem;
+}
+
+section > p {
   max-width: 60ch;
   margin: 0 auto 0.75rem;
   text-align: center;
+  font-size: 1.05rem;
 }
 
-#problema {
-  border-top: 4px solid var(--cor-perigo);
+/* ===== Fluxo de operação (sequência real: 01 a 04) ===== */
+.fluxo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  list-style: none;
+  max-width: 960px;
+  margin: 2.5rem auto 0;
+  counter-reset: etapa;
 }
 
-#tecnologia,
-#objetivos {
-  background: var(--cor-branco);
+.fluxo li {
+  flex: 1 1 200px;
+  max-width: 230px;
+  background: var(--branco);
+  border: 1px solid rgba(23, 32, 47, 0.12);
+  padding: 1.25rem;
+  text-align: center;
 }
 
-#beneficios {
-  border-top: 4px solid var(--cor-primaria);
+.fluxo-num {
+  display: block;
+  font-family: var(--fonte-dado);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--sirene);
+  text-shadow: 1px 1px 0 var(--tinta);
 }
 
-/* ===== Cards (Público-alvo e Benefícios) ===== */
+.fluxo h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0.35rem 0;
+}
+
+.fluxo p {
+  font-size: 0.88rem;
+  color: rgba(23, 32, 47, 0.75);
+}
+
+/* ===== Escala de risco ===== */
+.escala {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+  list-style: none;
+  margin-top: 1.75rem;
+}
+
+.escala li {
+  font-family: var(--fonte-dado);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 0.5rem 1rem;
+  color: var(--branco);
+  border-left: 6px solid var(--branco);
+}
+
+.nivel-normal     { background: var(--nivel-normal); border-left-color: #1F6B41; }
+.nivel-atencao    { background: var(--nivel-atencao); border-left-color: #B8860B; color: var(--tinta); }
+.nivel-alerta     { background: var(--nivel-alerta); border-left-color: #B45309; }
+.nivel-emergencia { background: var(--nivel-emergencia); border-left-color: #8F1F14; }
+
+/* ===== Cards (placas) ===== */
 .cards {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   list-style: none;
-  max-width: 900px;
+  max-width: 960px;
   margin: 0 auto;
 }
 
 .card {
-  background: var(--cor-branco);
-  border-radius: 10px;
+  background: var(--branco);
+  border: 1px solid rgba(23, 32, 47, 0.12);
+  border-top: 4px solid var(--sirene);
   padding: 1.5rem;
   text-align: center;
-  box-shadow: 0 2px 6px rgba(29, 43, 58, 0.08);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px rgba(23, 32, 47, 0.12);
+}
+
+.card img {
+  width: 48px;
+  margin: 0 auto 0.75rem;
 }
 
 .card h3 {
-  margin: 0.5rem 0;
-  font-size: 1.125rem;
-  color: var(--cor-texto);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
 }
 
 .card p {
-  margin: 0;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
+  color: rgba(23, 32, 47, 0.75);
 }
 
-/* ===== Formulário ===== */
+/* ===== Formulário (ficha) ===== */
 #formulario form {
-  max-width: 420px;
+  max-width: 440px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  background: var(--cor-branco);
-  padding: 1.5rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(29, 43, 58, 0.08);
+  background: var(--branco);
+  border: 1px solid rgba(23, 32, 47, 0.12);
+  border-top: 4px solid var(--sirene);
+  padding: 1.75rem;
 }
 
 #formulario label {
-  font-weight: 600;
   display: block;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.3rem;
+  font-family: var(--fonte-dado);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
 #formulario input {
   width: 100%;
-  padding: 0.6rem;
-  border: 2px solid var(--cor-fundo);
-  border-radius: 6px;
+  padding: 0.65rem;
+  border: 2px solid rgba(23, 32, 47, 0.2);
+  border-radius: 0;
   font-family: var(--fonte-texto);
   font-size: 1rem;
+  background: var(--papel);
 }
 
 #formulario input:focus {
   outline: none;
-  border-color: var(--cor-primaria);
+  border-color: var(--agua);
 }
 
 #formulario button {
-  padding: 0.75rem;
+  padding: 0.85rem;
   border: none;
-  border-radius: 6px;
-  background: var(--cor-primaria);
-  color: var(--cor-branco);
-  font-family: var(--fonte-titulo);
+  background: var(--sirene);
+  color: var(--tinta);
+  font-family: var(--fonte-dado);
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
   cursor: pointer;
+  transition: background-color 0.15s;
 }
 
 #formulario button:hover {
-  background: var(--cor-primaria-escura);
+  background: #E8B50E;
 }
 
+#formulario .nota-dados {
+  color: rgba(23, 32, 47, 0.55);
+}
+
+/* estados criados pela validação em JavaScript */
 .erro {
-  color: var(--cor-perigo);
-  font-size: 0.875rem;
+  display: block;
+  font-family: var(--fonte-dado);
+  font-size: 0.75rem;
+  color: var(--emergencia);
 }
 
-/* Estados criados pela validação em JavaScript */
 .campo-invalido {
-  border-color: var(--cor-perigo) !important;
+  border-color: var(--emergencia) !important;
 }
 
 .sucesso {
-  color: var(--cor-primaria);
+  font-family: var(--fonte-dado);
+  font-size: 0.85rem;
   font-weight: 600;
+  color: var(--nivel-normal);
   text-align: center;
 }
 
-/* ===== Slideshow ===== */
+/* ===== Slideshow (registro de monitoramento) ===== */
 .slideshow {
-  position: relative;
   max-width: 640px;
-  margin: 2rem auto 0;
-  border-radius: 10px;
+  margin: 2.5rem auto 0;
+  background: var(--tempestade);
+}
+
+.slide-janela {
+  position: relative;
   overflow: hidden;
-  box-shadow: 0 2px 6px rgba(29, 43, 58, 0.08);
 }
 
 .slide {
@@ -272,16 +703,17 @@ section p {
   top: 50%;
   transform: translateY(-50%);
   border: none;
-  background: rgba(29, 43, 58, 0.6);
-  color: var(--cor-branco);
-  font-size: 1.25rem;
-  padding: 0.6rem 0.9rem;
+  background: rgba(23, 32, 47, 0.65);
+  color: var(--branco);
+  font-size: 1.2rem;
+  padding: 0.6rem 0.85rem;
   cursor: pointer;
-  border-radius: 4px;
+  transition: background-color 0.15s;
 }
 
 .slide-btn:hover {
-  background: rgba(29, 43, 58, 0.85);
+  background: var(--sirene);
+  color: var(--tinta);
 }
 
 .slide-anterior {
@@ -292,24 +724,66 @@ section p {
   right: 0.5rem;
 }
 
+.slide-barra {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: var(--fonte-dado);
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--papel);
+  padding: 0.6rem 0.9rem;
+}
+
+.slide-barra b {
+  color: var(--sirene);
+}
+
 /* ===== Rodapé ===== */
 footer {
-  background: var(--cor-texto);
-  color: var(--cor-fundo);
-  padding: 2rem 1.25rem 1rem;
+  background: var(--tinta);
+  color: var(--papel);
+  padding: 2.5rem 1.25rem 1.25rem;
+}
+
+/* faixa de sinalização no topo do rodapé */
+footer::before {
+  content: "";
+  display: block;
+  height: 6px;
+  max-width: 96px;
+  margin: 0 auto 2rem;
+  background: var(--faixa);
 }
 
 .footer-conteudo {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  max-width: 900px;
+  max-width: 960px;
   margin: 0 auto;
 }
 
-.footer-coluna h3 {
-  color: var(--cor-branco);
+.footer-coluna img {
+  width: 40px;
   margin-bottom: 0.5rem;
+}
+
+.footer-coluna p {
+  font-size: 0.9rem;
+  color: rgba(237, 241, 244, 0.75);
+}
+
+.footer-coluna h3 {
+  font-family: var(--fonte-dado);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--sirene);
+  margin-bottom: 0.6rem;
 }
 
 .footer-coluna ul {
@@ -317,18 +791,20 @@ footer {
 }
 
 .footer-coluna a {
-  color: var(--cor-fundo);
+  color: var(--papel);
+  font-size: 0.9rem;
 }
 
 .footer-coluna a:hover {
-  color: var(--cor-alerta);
+  color: var(--sirene);
 }
 
 .footer-copy {
   text-align: center;
-  font-size: 0.875rem;
-  margin-top: 1.5rem;
-  opacity: 0.8;
+  font-family: var(--fonte-dado);
+  font-size: 0.72rem;
+  margin-top: 2rem;
+  color: rgba(237, 241, 244, 0.55);
 }
 
 /* ===== Responsividade (mobile-first) ===== */
@@ -336,7 +812,7 @@ footer {
   nav ul {
     flex-direction: row;
     justify-content: center;
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
 
   .cards {
@@ -372,15 +848,31 @@ footer {
     margin-top: 0;
   }
 
-  .hero {
-    min-height: 70vh;
-  }
-
-  .hero h1 {
-    font-size: 3.5rem;
+  #barra-nivel {
+    display: none;
   }
 
   section {
-    padding: 4rem 3rem;
+    padding: 4.5rem 3rem;
+  }
+
+  .hero {
+    min-height: calc(92vh);
+  }
+}
+
+/* ===== Movimento reduzido ===== */
+@media (prefers-reduced-motion: reduce) {
+  .chuva::before,
+  .chuva::after {
+    animation: none;
+  }
+
+  .botao,
+  .card,
+  #barra-nivel,
+  .gauge-agua,
+  .slide-btn {
+    transition: none;
   }
 }

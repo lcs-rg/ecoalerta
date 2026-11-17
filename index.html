@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <div id="barra-nivel" aria-hidden="true"></div>
+
   <header>
     <a href="#inicio" class="logo">
       <img src="img/logo.svg" alt="Logotipo do EcoAlerta">
@@ -25,35 +27,104 @@
     </nav>
   </header>
 
+  <aside id="gauge" class="gauge" data-nivel="normal" aria-hidden="true">
+    <span class="gauge-titulo">Risco</span>
+    <div class="gauge-trilho">
+      <div class="gauge-agua" id="gauge-agua"></div>
+      <span class="gauge-leitura" id="gauge-leitura">0%</span>
+    </div>
+    <ul class="gauge-niveis">
+      <li class="nivel-emergencia">Emergência</li>
+      <li class="nivel-alerta">Alerta</li>
+      <li class="nivel-atencao">Atenção</li>
+      <li class="nivel-normal">Normal</li>
+    </ul>
+  </aside>
+
   <main>
     <section id="inicio" class="hero">
-      <h1>EcoAlerta</h1>
-      <p>Monitoramento do nível da água e alertas em áreas de risco.</p>
+      <div class="chuva" aria-hidden="true"></div>
+      <div class="hero-conteudo">
+        <span class="hero-tag">Sistema comunitário de alerta · São Paulo</span>
+        <h1>EcoAlerta</h1>
+        <p class="hero-lead">Monitoramento do nível da água e alertas em áreas de risco.</p>
+        <p class="hero-frase">Não podemos impedir a chuva. Podemos ajudar a cidade a se preparar.</p>
+        <div class="leitura">
+          <span class="leitura-item">Chuva <b id="leitura-chuva">38 mm/h</b></span>
+          <span class="leitura-item">Nível <b id="leitura-nivel">0,42 m</b></span>
+          <span class="leitura-item">Status <b id="leitura-status" data-nivel="atencao">Atenção</b></span>
+        </div>
+        <p class="nota-dados">Leitura simulada para demonstração.</p>
+        <div class="hero-acoes">
+          <a href="#formulario" class="botao botao-primario">Quero receber alertas</a>
+          <a href="#problema" class="botao botao-fantasma">Entender o problema</a>
+        </div>
+      </div>
     </section>
 
     <section id="problema">
-      <h2>Problema</h2>
+      <div class="cabeca">
+        <span class="tag">Alerta ativo · Nível subindo</span>
+        <h2>Problema</h2>
+      </div>
       <img src="img/icones/chuva.svg" alt="Ícone de nuvem de chuva sobre uma cidade">
       <p>Enchentes e alagamentos tomam as ruas de São Paulo a cada chuva forte.</p>
       <p>Falta comunicação rápida entre Defesa Civil e moradores de áreas de risco.</p>
     </section>
 
     <section id="tecnologia">
-      <h2>Tecnologia</h2>
+      <div class="cabeca">
+        <span class="tag">Sinal do sensor · Ativo</span>
+        <h2>Tecnologia</h2>
+      </div>
       <img src="img/icones/sensor.svg" alt="Ícone de sensor eletrônico emitindo sinal">
       <p>Arduino e sensor de nível de água monitoram os pontos de risco.</p>
       <p>Python classifica o perigo e a página web informa a população.</p>
+      <ol class="fluxo">
+        <li>
+          <span class="fluxo-num">01</span>
+          <h3>Monitorar</h3>
+          <p>Sensor acompanha o nível da água.</p>
+        </li>
+        <li>
+          <span class="fluxo-num">02</span>
+          <h3>Identificar</h3>
+          <p>Limites definidos classificam a situação.</p>
+        </li>
+        <li>
+          <span class="fluxo-num">03</span>
+          <h3>Alertar</h3>
+          <p>LEDs e buzzer sinalizam o risco no local.</p>
+        </li>
+        <li>
+          <span class="fluxo-num">04</span>
+          <h3>Informar</h3>
+          <p>Esta página apresenta os dados à cidade.</p>
+        </li>
+      </ol>
     </section>
 
     <section id="objetivos">
-      <h2>Objetivos</h2>
+      <div class="cabeca">
+        <span class="tag">Escala de risco oficial</span>
+        <h2>Objetivos</h2>
+      </div>
       <img src="img/icones/alvo.svg" alt="Ícone de alvo com seta no centro">
       <p>Monitorar o nível da água e classificar em Normal, Atenção, Alerta ou Emergência.</p>
       <p>Avisar os moradores com antecedência para reduzir riscos e perdas.</p>
+      <ul class="escala">
+        <li class="nivel-normal">Normal</li>
+        <li class="nivel-atencao">Atenção</li>
+        <li class="nivel-alerta">Alerta</li>
+        <li class="nivel-emergencia">Emergência</li>
+      </ul>
     </section>
 
     <section id="publico">
-      <h2>Público-alvo</h2>
+      <div class="cabeca">
+        <span class="tag">Quem está na chuva</span>
+        <h2>Público-alvo</h2>
+      </div>
       <ul class="cards">
         <li class="card">
           <img src="img/icones/moradores.svg" alt="Ícone de grupo de moradores">
@@ -74,7 +145,10 @@
     </section>
 
     <section id="beneficios">
-      <h2>Benefícios</h2>
+      <div class="cabeca">
+        <span class="tag">O que muda com o EcoAlerta</span>
+        <h2>Benefícios</h2>
+      </div>
       <ul class="cards">
         <li class="card">
           <img src="img/icones/tempo.svg" alt="Ícone de relógio marcando tempo">
@@ -100,8 +174,10 @@
     </section>
 
     <section id="formulario">
-      <h2>Cadastre-se para receber alertas</h2>
-
+      <div class="cabeca">
+        <span class="tag">Ficha de cadastro</span>
+        <h2>Cadastre-se para receber alertas</h2>
+      </div>
       <form id="form-alerta" action="#" method="post" novalidate>
         <div>
           <label for="nome">Nome</label>
@@ -116,15 +192,22 @@
           <input type="text" id="regiao" name="regiao" required>
         </div>
         <button type="submit">Quero receber alertas</button>
+        <p class="nota-dados">Dados usados apenas para demonstração do projeto.</p>
       </form>
 
-      <div class="slideshow">
-        <img src="img/slide1.svg" alt="Rua alagada durante chuva forte em São Paulo" class="slide ativo">
-        <img src="img/slide2.svg" alt="Sensor de nível de água instalado em ponto de monitoramento" class="slide">
-        <img src="img/slide3.svg" alt="Pessoa recebendo alerta de emergência no celular" class="slide">
-        <button type="button" class="slide-btn slide-anterior" aria-label="Imagem anterior">&#10094;</button>
-        <button type="button" class="slide-btn slide-proximo" aria-label="Próxima imagem">&#10095;</button>
-      </div>
+      <figure class="slideshow">
+        <div class="slide-janela">
+          <img src="img/slide1.svg" alt="Rua alagada durante chuva forte em São Paulo" class="slide ativo">
+          <img src="img/slide2.svg" alt="Sensor de nível de água instalado em ponto de monitoramento" class="slide">
+          <img src="img/slide3.svg" alt="Pessoa recebendo alerta de emergência no celular" class="slide">
+          <button type="button" class="slide-btn slide-anterior" aria-label="Imagem anterior">&#10094;</button>
+          <button type="button" class="slide-btn slide-proximo" aria-label="Próxima imagem">&#10095;</button>
+        </div>
+        <figcaption class="slide-barra">
+          <span>Registro <b id="slide-num">01</b>/03</span>
+          <span>Câmera · ponto de monitoramento</span>
+        </figcaption>
+      </figure>
     </section>
   </main>
 

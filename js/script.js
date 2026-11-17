@@ -1,17 +1,22 @@
 /* ============================================================
    EcoAlerta — script.js
-   Slideshow (3 imagens) e validação do formulário de cadastro.
-   Desenvolvido em JavaScript puro (ES6+), sem frameworks.
+   Slideshow (3 imagens), validação do formulário, régua de
+   risco ligada ao scroll e leitura simulada do sensor.
+   JavaScript puro (ES6+), sem frameworks.
    ============================================================ */
+
+// Respeita a preferência do usuário por menos movimento
+const reduzirMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ===== Slideshow ===== */
 
-// Seleciona todas as imagens do slideshow e os botões de navegação
+// Seleciona as imagens do slideshow, os botões e o contador "01/03"
 const slides = document.querySelectorAll('.slide');
 const botaoAnterior = document.querySelector('.slide-anterior');
 const botaoProximo = document.querySelector('.slide-proximo');
+const slideNumero = document.querySelector('#slide-num');
 
-// Controla qual slide está visível no momento (começa no primeiro)
+// Controla qual slide está visível (começa no primeiro)
 let indiceAtual = 0;
 
 /**
@@ -24,6 +29,8 @@ function trocarSlide(novoIndice) {
   novoIndice = (novoIndice + slides.length) % slides.length;
   slides[novoIndice].classList.add('ativo'); // exibe o novo slide
   indiceAtual = novoIndice;
+  // Atualiza o contador da barra "REGISTRO 01/03"
+  slideNumero.textContent = String(indiceAtual + 1).padStart(2, '0');
 }
 
 // Botões avançam ou retrocedem um slide a partir do índice atual
@@ -97,3 +104,100 @@ campos.forEach((campo) => {
     if (aviso) aviso.remove();
   });
 });
+
+/* ===== Régua de risco (a página "enche" conforme o scroll) ===== */
+
+// Elementos da régua lateral (desktop) e da barra (mobile)
+const gauge = document.querySelector('#gauge');
+const gaugeAgua = document.querySelector('#gauge-agua');
+const gaugeLeitura = document.querySelector('#gauge-leitura');
+const barraNivel = document.querySelector('#barra-nivel');
+
+// Seções observadas pelo destaque do menu
+const secoes = document.querySelectorAll('main section[id]');
+const linksMenu = document.querySelectorAll('nav a');
+
+// Escala oficial de risco: cada faixa de scroll é um nível
+const NIVEIS = [
+  { limite: 25, nome: 'normal' },
+  { limite: 50, nome: 'atencao' },
+  { limite: 75, nome: 'alerta' },
+  { limite: 100, nome: 'emergencia' },
+];
+
+// Converte o percentual de scroll em um nível da escala
+function nivelDoScroll(percentual) {
+  for (const nivel of NIVEIS) {
+    if (percentual <= nivel.limite) return nivel.nome;
+  }
+  return 'emergencia';
+}
+
+// Recalcula a "nível da água" da página e a seção visível
+function atualizarNivel() {
+  const alturaRolagem = document.documentElement.scrollHeight - window.innerHeight;
+  const percentual = alturaRolagem > 0
+    ? Math.min(100, Math.round((window.scrollY / alturaRolagem) * 100))
+    : 0;
+
+  // Régua lateral: coluna d'água sobe e a leitura acompanha
+  gaugeAgua.style.height = percentual + '%';
+  gaugeLeitura.style.bottom = percentual + '%';
+  gaugeLeitura.textContent = percentual + '%';
+  gauge.dataset.nivel = nivelDoScroll(percentual);
+
+  // Barra superior (mobile): mesma informação
+  barraNivel.style.width = percentual + '%';
+  barraNivel.dataset.nivel = nivelDoScroll(percentual);
+
+  // Scrollspy: marca no menu a seção que está na tela
+  let secaoVisivel = '';
+  secoes.forEach((secao) => {
+    const area = secao.getBoundingClientRect();
+    if (area.top <= window.innerHeight * 0.4 && area.bottom >= window.innerHeight * 0.4) {
+      secaoVisivel = secao.id;
+    }
+  });
+  linksMenu.forEach((link) => {
+    link.classList.toggle('ativo', link.getAttribute('href') === '#' + secaoVisivel);
+  });
+}
+
+// A leitura muda a cada rolagem e ao redimensionar a janela
+window.addEventListener('scroll', atualizarNivel, { passive: true });
+window.addEventListener('resize', atualizarNivel);
+atualizarNivel();
+
+/* ===== Leitura simulada do sensor (hero) ===== */
+
+// Valores fictícios para demonstração (declarados na página)
+const LEITURAS = [
+  { chuva: '38 mm/h', nivel: '0,42 m', status: 'atencao' },
+  { chuva: '45 mm/h', nivel: '0,49 m', status: 'alerta' },
+  { chuva: '33 mm/h', nivel: '0,40 m', status: 'atencao' },
+  { chuva: '27 mm/h', nivel: '0,34 m', status: 'normal' },
+  { chuva: '41 mm/h', nivel: '0,46 m', status: 'atencao' },
+];
+
+const leituraChuva = document.querySelector('#leitura-chuva');
+const leituraNivel = document.querySelector('#leitura-nivel');
+const leituraStatus = document.querySelector('#leitura-status');
+
+let leituraIndice = 0;
+
+// Troca os valores exibidos para o próximo registro da lista
+function atualizarLeitura() {
+  const leitura = LEITURAS[leituraIndice % LEITURAS.length];
+  leituraChuva.textContent = leitura.chuva;
+  leituraNivel.textContent = leitura.nivel;
+  leituraStatus.textContent = leitura.status.charAt(0).toUpperCase() + leitura.status.slice(1);
+  leituraStatus.dataset.nivel = leitura.status;
+  leituraIndice++;
+}
+
+atualizarLeitura();
+
+// A leitura "pulsa" a cada 2,5 s (desligada se o usuário pediu menos movimento)
+if (!reduzirMovimento) {
+  setInterval(atualizarLeitura, 2500);
+}
