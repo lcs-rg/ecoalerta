@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="EcoAlerta — monitoramento do nível da água e alertas de enchente em áreas de risco de São Paulo.">
+  <title>EcoAlerta — Tecnologia para prevenir riscos</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <a href="#inicio" class="logo">
+      <img src="img/logo.png" alt="Logotipo do EcoAlerta">
+      <span>EcoAlerta</span>
+    </a>
+    <nav aria-label="Menu principal">
+      <ul>
+        <li><a href="#problema">Problema</a></li>
+        <li><a href="#tecnologia">Tecnologia</a></li>
+        <li><a href="#objetivos">Objetivos</a></li>
+        <li><a href="#publico">Público-alvo</a></li>
+        <li><a href="#beneficios">Benefícios</a></li>
+        <li><a href="#formulario">Cadastre-se</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="inicio" class="hero">
+      <h1>EcoAlerta</h1>
+      <p>Monitoramento do nível da água e alertas em áreas de risco.</p>
+    </section>
+
+    <section id="problema">
+      <h2>Problema</h2>
+    </section>
+
+    <section id="tecnologia">
+      <h2>Tecnologia</h2>
+    </section>
+
+    <section id="objetivos">
+      <h2>Objetivos</h2>
+    </section>
+
+    <section id="publico">
+      <h2>Público-alvo</h2>
+    </section>
+
+    <section id="beneficios">
+      <h2>Benefícios</h2>
+    </section>
+
+    <section id="formulario">
+      <h2>Cadastre-se para receber alertas</h2>
+
+      <form id="form-alerta" action="#" method="post" novalidate>
+        <div>
+          <label for="nome">Nome</label>
+          <input type="text" id="nome" name="nome" required>
+        </div>
+        <div>
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+          <label for="regiao">Região de risco</label>
+          <input type="text" id="regiao" name="regiao" required>
+        </div>
+        <button type="submit">Quero receber alertas</button>
+      </form>
+
+      <div class="slideshow">
+        <img src="img/slide1.jpg" alt="Rua alagada durante chuva forte em São Paulo" class="slide ativo">
+        <img src="img/slide2.jpg" alt="Sensor de nível de água instalado em ponto de monitoramento" class="slide">
+        <img src="img/slide3.jpg" alt="Pessoa recebendo alerta de emergência no celular" class="slide">
+        <button type="button" class="slide-btn slide-anterior" aria-label="Imagem anterior">&#10094;</button>
+        <button type="button" class="slide-btn slide-proximo" aria-label="Próxima imagem">&#10095;</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>EcoAlerta &mdash; FIAP Global Solution 2026.2</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
