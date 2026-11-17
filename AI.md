@@ -10,6 +10,7 @@
 | opencode (assistente de código, modelo GLM) | Apoio na escrita e revisão do `js/script.js` (slideshow, validação do formulário, régua de risco por scroll e leitura simulada) e nos estilos associados do `css/style.css` |
 | opencode (assistente de código, modelo GLM) | Redesign da identidade visual da landing page (direção "sinalização de defesa civil": paleta, tipografia Allerta Stencil/Archivo/IBM Plex Mono, régua de risco lateral, faixas de sinalização, hero com chuva animada) — reescrita de `index.html`, `css/style.css` e ampliação do `js/script.js` |
 | Ferramenta de IA de imagens (escolhida pelo grupo) | Geração da ilustração 3D isométrica `img/hero-cidade-3d.webp` (cena de rua alagada com posto de monitoramento EcoAlerta e régua de nível). Integração no hero, otimização (WebP) e texto `alt` feitas com apoio do opencode |
+| Ferramenta de IA de imagens (escolhida pelo grupo) | Geração de 4 cenas 3D diorama na mesma paleta do site: `img/problema-cena.webp` (vitrine da seção Problema) e `img/slide1.webp`/`slide2.webp`/`slide3.webp` (slideshow). Otimização (WebP), integração e textos `alt` feitas com apoio do opencode |
 
 ## Prompts utilizados
 
@@ -20,12 +21,13 @@
 5. *"Expanda o js/script.js com a régua de risco (gauge) atualizada por scroll, barra de nível no mobile, scrollspy no menu e leitura simulada do sensor no hero."*
 6. *"Teste de paleta solicitado pelo grupo: reconstruir a identidade usando apenas 3 cores (#000000, #FFFFFF, #CBF615), recolorindo todos os SVGs e codificando a escala de risco por intensidade do acento (contorno branco → contorno ácido → texto ácido → fundo ácido) já que uma única cor não codifica 4 níveis."*
 7. *"Segundo teste de paleta solicitado pelo grupo: 3 cores (#081B40 tempestade, #FBE8CF papel de boletim, #FDAC2F alarme) — página clara com zonas de tempestade navy no hero/régua/rodapé, recolorindo os SVGs (ícones navy sobre creme, slides claros sobre navy) e regraduando a escala de risco por intensidade com regra de contraste: laranja nunca como texto sobre creme."*
+8. *"Refinamento visual solicitado pelo grupo: remover a chuva animada do hero e adotar direção 'editorial lúdica' (referência Dribbble) — hero claro em creme, título gigante em Archivo 800/900 (Allerta Stencil apenas no logotipo), cantos arredondados em painéis/cartões/botões no lugar das faixas de sinalização, e as cenas 3D diorama exibidas como produto dentro de molduras navy arredondadas, mantendo a régua de risco, o scrollspy, o formulário, o slideshow e os requisitos do edital."*
 
 ## Funcionalidades desenvolvidas com auxílio de IA
 
 - `js/script.js` (arquivo completo): lógica do slideshow (navegação circular por operador de módulo e contador do registro), validação do formulário (campos vazios, formato de e-mail, erros inline, feedback de sucesso), régua de risco atualizada por scroll (gauge lateral, barra mobile, scrollspy no menu) e leitura simulada do sensor no hero.
-- `css/style.css`: identidade visual completa da versão "sinalização de defesa civil" (paleta, tipografia, régua, faixas, hero com chuva) e os blocos de estados da validação (`.erro`, `.campo-invalido`, `.sucesso`).
-- `index.html`: reestruturação da marcação para a nova identidade (régua, hero com chuva, etiquetas de seção, fluxo 01–04, escala de risco, barra de registro do slideshow) — **mantendo integralmente os textos e a estrutura de seções escritos pelo integrante**.
+- `css/style.css`: identidade visual completa — versão atual "editorial lúdica" (hero creme sem chuva, tipografia Archivo 800/900, painéis arredondados, molduras navy para as cenas 3D), os estados da validação (`.erro`, `.campo-invalido`, `.sucesso`) e os estilos da régua de risco.
+- `index.html`: reestruturação da marcação para a identidade (régua, hero em duas colunas com moldura, etiquetas de seção, fluxo 01–04, escala de risco, painel vitrine no Problema, barra de registro do slideshow) — **mantendo integralmente os textos e a estrutura de seções escritos pelo integrante**.
 
 ## Funcionalidades desenvolvidas sem auxílio de IA
 

@@ -43,7 +43,6 @@
 
   <main>
     <section id="inicio" class="hero">
-      <div class="chuva" aria-hidden="true"></div>
       <div class="hero-conteudo">
         <div class="hero-texto">
           <span class="hero-tag">Sistema comunitário de alerta · São Paulo</span>
@@ -61,7 +60,9 @@
             <a href="#problema" class="botao botao-fantasma">Entender o problema</a>
           </div>
         </div>
-        <img class="hero-cena" src="img/hero-cidade-3d.webp" alt="Cena 3D isométrica de uma rua de São Paulo alagada, com o posto de monitoramento EcoAlerta equipado com sensor, sirene e painel solar, e a régua de nível da água marcando de 1 a 4 metros">
+        <div class="hero-moldura">
+          <img class="hero-cena" src="img/hero-cidade-3d.webp" alt="Cena 3D isométrica de uma rua de São Paulo alagada, com o posto de monitoramento EcoAlerta equipado com sensor, sirene e painel solar, e a régua de nível da água marcando de 1 a 4 metros">
+        </div>
       </div>
     </section>
 
@@ -70,7 +71,9 @@
         <span class="tag">Alerta ativo · Nível subindo</span>
         <h2>Problema</h2>
       </div>
-      <img src="img/icones/chuva.svg" alt="Ícone de nuvem de chuva sobre uma cidade">
+      <div class="cena-problema">
+        <img src="img/problema-cena.webp" alt="Cena 3D isométrica de uma avenida de São Paulo alagada pela chuva, com carro parado na água e posto de monitoramento EcoAlerta ao lado da régua de nível">
+      </div>
       <p>Enchentes e alagamentos tomam as ruas de São Paulo a cada chuva forte.</p>
       <p>Falta comunicação rápida entre Defesa Civil e moradores de áreas de risco.</p>
     </section>
@@ -200,9 +203,9 @@
 
       <figure class="slideshow">
         <div class="slide-janela">
-          <img src="img/slide1.svg" alt="Rua alagada durante chuva forte em São Paulo" class="slide ativo">
-          <img src="img/slide2.svg" alt="Sensor de nível de água instalado em ponto de monitoramento" class="slide">
-          <img src="img/slide3.svg" alt="Pessoa recebendo alerta de emergência no celular" class="slide">
+          <img src="img/slide1.webp" alt="Cena 3D de viaduto alagado em São Paulo, com carro atravessando e régua de nível marcando risco de enchente" class="slide ativo">
+          <img src="img/slide2.webp" alt="Cena 3D de esquina alagada com a estação de monitoramento EcoAlerta e régua marcando os níveis Normal, Atenção, Alerta e Emergência" class="slide">
+          <img src="img/slide3.webp" alt="Cena 3D de marginal alagada com carro em ruas secas e poste de monitoramento EcoAlerta medindo o nível da água" class="slide">
           <button type="button" class="slide-btn slide-anterior" aria-label="Imagem anterior">&#10094;</button>
           <button type="button" class="slide-btn slide-proximo" aria-label="Próxima imagem">&#10095;</button>
         </div>

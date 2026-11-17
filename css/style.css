@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Archivo:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
 /* ============================================================
-   EcoAlerta — identidade "boletim meteorológico + sirene"
+   EcoAlerta — identidade "editorial lúdica de defesa civil"
    Paleta de 3 cores: #081B40 (tempestade), #FBE8CF (papel),
    #FDAC2F (alarme). Tons intermediários só via opacidade.
    Regra de contraste: o laranja nunca é texto sobre creme —
    aparece como preenchimento, borda ou sobre o navy.
-   A escala de risco é codificada por intensidade do alarme.
+   A escala de risco é codificada pela intensidade do alarme.
    ============================================================ */
 
 :root {
@@ -22,8 +22,8 @@
   --fonte-texto: 'Archivo', sans-serif;
   --fonte-dado: 'IBM Plex Mono', monospace;
 
-  /* Faixa de sinalização (laranje/navy) */
-  --faixa: repeating-linear-gradient(-45deg, var(--sirene) 0 12px, var(--tempestade) 12px 24px);
+  /* raio lúdico dos painéis e cartões */
+  --raio: 24px;
 }
 
 /* ===== Base ===== */
@@ -66,7 +66,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   outline-offset: 2px;
 }
 
-.hero a, .footer a {
+.footer a {
   text-decoration-color: rgba(251, 232, 207, 0.4);
 }
 
@@ -193,15 +193,16 @@ header {
   padding: 1rem 1.25rem;
 }
 
-/* faixa de sinalização sob o header */
+/* barra de alarme sob o header */
 header::after {
   content: "";
   position: absolute;
-  left: 0;
-  right: 0;
+  left: 1.25rem;
+  right: 1.25rem;
   bottom: -6px;
   height: 6px;
-  background: var(--faixa);
+  border-radius: 999px;
+  background: var(--sirene);
 }
 
 .logo {
@@ -265,7 +266,7 @@ nav a.ativo::after {
   background: var(--sirene);
 }
 
-/* ===== Hero (zona de tempestade) ===== */
+/* ===== Hero (editorial claro, produto como protagonista) ===== */
 .hero {
   position: relative;
   overflow: hidden;
@@ -276,30 +277,8 @@ nav a.ativo::after {
   text-align: center;
   min-height: 88vh;
   padding: 4rem 1.25rem;
-  background: var(--tempestade);
-  color: var(--branco);
-}
-
-/* chuva em duas camadas de traços caindo */
-.chuva::before, .chuva::after {
-  content: "";
-  position: absolute;
-  inset: -180px 0 0 0;
-  pointer-events: none;
-}
-
-.chuva::before {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='160'%3E%3Cline x1='28' y1='0' x2='28' y2='30' stroke='rgba(251,232,207,0.4)' stroke-width='2'/%3E%3C/svg%3E");
-  animation: cair 0.9s linear infinite;
-}
-
-.chuva::after {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='220'%3E%3Cline x1='20' y1='0' x2='20' y2='22' stroke='rgba(253,172,47,0.3)' stroke-width='2'/%3E%3C/svg%3E");
-  animation: cair 1.5s linear infinite;
-}
-
-@keyframes cair {
-  to { transform: translateY(220px); }
+  background: var(--papel);
+  color: var(--tinta);
 }
 
 .hero-conteudo {
@@ -308,7 +287,7 @@ nav a.ativo::after {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 2.5rem;
 }
 
 .hero-texto {
@@ -318,11 +297,18 @@ nav a.ativo::after {
   gap: 1rem;
 }
 
+/* moldura navy arredondada emoldura a cena 3D como produto */
+.hero-moldura {
+  background: var(--tempestade);
+  border-radius: var(--raio);
+  padding: 1.5rem;
+  box-shadow: 0 24px 48px rgba(8, 27, 64, 0.25);
+}
+
 /* cena 3D do posto de monitoramento (fundo transparente) */
 .hero-cena {
   width: min(520px, 92%);
-  margin-top: 0.5rem;
-  filter: drop-shadow(0 24px 32px rgba(0, 0, 0, 0.45));
+  filter: drop-shadow(0 16px 24px rgba(0, 0, 0, 0.35));
 }
 
 .hero-tag {
@@ -331,30 +317,33 @@ nav a.ativo::after {
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--sirene);
-  border: 1px solid var(--sirene);
+  color: var(--tinta);
+  border: 2px solid var(--tempestade);
+  border-radius: 999px;
   padding: 0.35rem 0.9rem;
 }
 
 .hero h1 {
-  font-family: var(--fonte-sinal);
-  font-weight: 400;
-  font-size: clamp(3rem, 9vw, 5rem);
-  letter-spacing: 0.02em;
-  color: var(--branco);
+  font-family: var(--fonte-texto);
+  font-weight: 900;
+  font-size: clamp(3.5rem, 10vw, 6.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--tinta);
 }
 
 .hero-lead {
   max-width: 44ch;
-  font-size: 1.15rem;
-  color: rgba(251, 232, 207, 0.9);
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: rgba(8, 27, 64, 0.85);
 }
 
 .hero-frase {
   max-width: 40ch;
   font-family: var(--fonte-dado);
   font-size: 0.9rem;
-  color: rgba(251, 232, 207, 0.65);
+  color: rgba(8, 27, 64, 0.65);
 }
 
 /* leitura do sensor (dados simulados) */
@@ -371,15 +360,19 @@ nav a.ativo::after {
   font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: rgba(251, 232, 207, 0.75);
-  background: rgba(251, 232, 207, 0.08);
+  color: var(--tinta);
+  background: rgba(8, 27, 64, 0.06);
   padding: 0.45rem 0.8rem;
-  border: 1px solid rgba(251, 232, 207, 0.25);
+  border-radius: 999px;
+  border: 1px solid rgba(8, 27, 64, 0.25);
 }
 
 .leitura-item b {
   font-weight: 600;
-  color: var(--sirene);
+  color: var(--tempestade);
+  background: var(--sirene);
+  border-radius: 999px;
+  padding: 0.05rem 0.5rem;
 }
 
 .nota-dados {
@@ -387,7 +380,7 @@ nav a.ativo::after {
   font-size: 0.62rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(251, 232, 207, 0.5);
+  color: rgba(8, 27, 64, 0.5);
 }
 
 .hero-acoes {
@@ -400,13 +393,14 @@ nav a.ativo::after {
 
 .botao {
   display: inline-block;
-  padding: 0.85rem 1.5rem;
+  padding: 0.85rem 1.6rem;
   font-family: var(--fonte-dado);
   font-size: 0.85rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   text-decoration: none;
+  border-radius: 999px;
   transition: transform 0.15s, background-color 0.15s, border-color 0.15s, color 0.15s;
 }
 
@@ -416,23 +410,24 @@ nav a.ativo::after {
 }
 
 .botao-primario {
+  background: var(--tempestade);
+  color: var(--papel);
+}
+
+.botao-primario:hover {
   background: var(--sirene);
   color: var(--tempestade);
 }
 
-.botao-primario:hover {
-  background: #E0941C;
-  color: var(--tempestade);
-}
-
 .botao-fantasma {
-  border: 2px solid rgba(251, 232, 207, 0.55);
-  color: var(--branco);
+  border: 2px solid var(--tempestade);
+  color: var(--tinta);
 }
 
 .botao-fantasma:hover {
+  background: var(--sirene);
   border-color: var(--sirene);
-  color: var(--sirene);
+  color: var(--tempestade);
 }
 
 /* ===== Seções (papel do boletim) ===== */
@@ -450,13 +445,14 @@ section {
   text-align: center;
 }
 
-/* faixa de sinalização acima de cada título */
+/* barra de alarme acima de cada título */
 .cabeca::before {
   content: "";
   display: block;
   width: 64px;
   height: 6px;
-  background: var(--faixa);
+  border-radius: 999px;
+  background: var(--sirene);
 }
 
 .tag {
@@ -476,15 +472,17 @@ section {
   content: "";
   width: 8px;
   height: 8px;
+  border-radius: 50%;
   background: var(--sirene);
 }
 
 section h2 {
   font-family: var(--fonte-texto);
-  font-weight: 700;
-  font-size: 1.9rem;
+  font-weight: 900;
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  line-height: 1;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: -0.02em;
   color: var(--tinta);
 }
 
@@ -498,6 +496,20 @@ section > p {
   margin: 0 auto 0.75rem;
   text-align: center;
   font-size: 1.05rem;
+}
+
+/* painel vitrine da seção problema (diorama como produto) */
+.cena-problema {
+  background: var(--tempestade);
+  border-radius: var(--raio);
+  padding: 1.5rem;
+  max-width: 720px;
+  margin: 0 auto 2rem;
+  box-shadow: 0 24px 48px rgba(8, 27, 64, 0.25);
+}
+
+.cena-problema img {
+  border-radius: 12px;
 }
 
 /* ===== Fluxo de operação (sequência real: 01 a 04) ===== */
@@ -516,6 +528,7 @@ section > p {
   max-width: 230px;
   background: var(--branco);
   border: 1px solid rgba(8, 27, 64, 0.25);
+  border-radius: var(--raio);
   border-top: 4px solid var(--sirene);
   padding: 1.25rem;
   text-align: center;
@@ -563,6 +576,7 @@ section > p {
   text-transform: uppercase;
   letter-spacing: 0.12em;
   padding: 0.5rem 1rem;
+  border-radius: 999px;
   background: var(--branco);
   color: var(--tinta);
   border: 1px solid rgba(8, 27, 64, 0.35);
@@ -586,6 +600,7 @@ section > p {
 .card {
   background: var(--branco);
   border: 1px solid rgba(8, 27, 64, 0.25);
+  border-radius: var(--raio);
   border-top: 4px solid var(--sirene);
   padding: 1.5rem;
   text-align: center;
@@ -622,6 +637,7 @@ section > p {
   gap: 1rem;
   background: var(--branco);
   border: 1px solid rgba(8, 27, 64, 0.25);
+  border-radius: var(--raio);
   border-top: 4px solid var(--sirene);
   padding: 1.75rem;
 }
@@ -638,12 +654,12 @@ section > p {
 
 #formulario input {
   width: 100%;
-  padding: 0.65rem;
+  padding: 0.65rem 0.9rem;
   border: 2px solid rgba(8, 27, 64, 0.35);
-  border-radius: 0;
+  border-radius: 12px;
   font-family: var(--fonte-texto);
   font-size: 1rem;
-  background: var(--branco);
+  background: var(--papel);
   color: var(--tinta);
 }
 
@@ -655,6 +671,7 @@ section > p {
 #formulario button {
   padding: 0.85rem;
   border: none;
+  border-radius: 999px;
   background: var(--sirene);
   color: var(--tempestade);
   font-family: var(--fonte-dado);
@@ -667,7 +684,8 @@ section > p {
 }
 
 #formulario button:hover {
-  background: #E0941C;
+  background: var(--tempestade);
+  color: var(--papel);
 }
 
 #formulario .nota-dados {
@@ -707,7 +725,9 @@ section > p {
   max-width: 640px;
   margin: 2.5rem auto 0;
   background: var(--tempestade);
+  border-radius: var(--raio);
   border: 1px solid rgba(8, 27, 64, 0.35);
+  overflow: hidden;
 }
 
 .slide-janela {
@@ -729,6 +749,7 @@ section > p {
   top: 50%;
   transform: translateY(-50%);
   border: none;
+  border-radius: 50%;
   background: rgba(251, 232, 207, 0.15);
   color: var(--branco);
   font-size: 1.2rem;
@@ -775,14 +796,15 @@ footer {
   padding: 2.5rem 1.25rem 1.25rem;
 }
 
-/* faixa de sinalização no topo do rodapé */
+/* barra de alarme no topo do rodapé */
 footer::before {
   content: "";
   display: block;
   height: 6px;
   max-width: 96px;
   margin: 0 auto 2rem;
-  background: var(--faixa);
+  border-radius: 999px;
+  background: var(--sirene);
 }
 
 .footer-conteudo {
@@ -906,18 +928,12 @@ footer::before {
   }
 
   .hero-cena {
-    width: min(560px, 44vw);
-    margin-top: 0;
+    width: min(480px, 40vw);
   }
 }
 
 /* ===== Movimento reduzido ===== */
 @media (prefers-reduced-motion: reduce) {
-  .chuva::before,
-  .chuva::after {
-    animation: none;
-  }
-
   .botao,
   .card,
   #barra-nivel,
