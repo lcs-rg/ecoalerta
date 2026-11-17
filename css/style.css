@@ -2,6 +2,7 @@
 
 :root {
   --cor-primaria: #0159a2;
+  --cor-primaria-escura: #013a6b;
   --cor-alerta: #f2a007;
   --cor-perigo: #d64545;
   --cor-fundo: #f4f8fb;
@@ -103,7 +104,7 @@ nav a:hover {
   gap: 1rem;
   min-height: 60vh;
   padding: 3rem 1.25rem;
-  background: linear-gradient(180deg, var(--cor-primaria), #013a6b);
+  background: linear-gradient(180deg, var(--cor-primaria), var(--cor-primaria-escura));
   color: var(--cor-branco);
 }
 
@@ -119,6 +120,7 @@ nav a:hover {
 /* ===== Seções ===== */
 section {
   padding: 3rem 1.25rem;
+  scroll-margin-top: 90px; /* evita que o header fixo cubra o topo da seção */
 }
 
 section h2 {
@@ -227,7 +229,7 @@ section p {
 }
 
 #formulario button:hover {
-  background: #013a6b;
+  background: var(--cor-primaria-escura);
 }
 
 .erro {
