@@ -9,6 +9,7 @@
 |---|---|
 | opencode (assistente de código, modelo GLM) | Apoio na escrita e revisão do `js/script.js` (slideshow, validação do formulário, régua de risco por scroll e leitura simulada) e nos estilos associados do `css/style.css` |
 | opencode (assistente de código, modelo GLM) | Redesign da identidade visual da landing page (direção "sinalização de defesa civil": paleta, tipografia Allerta Stencil/Archivo/IBM Plex Mono, régua de risco lateral, faixas de sinalização, hero com chuva animada) — reescrita de `index.html`, `css/style.css` e ampliação do `js/script.js` |
+| Ferramenta de IA de imagens (escolhida pelo grupo) | Geração da ilustração 3D isométrica `img/hero-cidade-3d.webp` (cena de rua alagada com posto de monitoramento EcoAlerta e régua de nível). Integração no hero, otimização (WebP) e texto `alt` feitas com apoio do opencode |
 
 ## Prompts utilizados
 
