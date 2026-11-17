@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;600&display=swap');
+
+:root {
+  --cor-primaria: #0159a2;
+  --cor-alerta: #f2a007;
+  --cor-perigo: #d64545;
+  --cor-fundo: #f4f8fb;
+  --cor-texto: #1d2b3a;
+  --cor-branco: #ffffff;
+  --fonte-titulo: 'Poppins', sans-serif;
+  --fonte-texto: 'Inter', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--fonte-texto);
+  color: var(--cor-texto);
+  background: var(--cor-fundo);
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-family: var(--fonte-titulo);
+  line-height: 1.2;
+}
+
+a, a:link, a:visited {
+  color: var(--cor-primaria);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--cor-alerta);
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
