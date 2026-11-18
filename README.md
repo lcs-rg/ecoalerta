@@ -36,6 +36,14 @@ ecoalerta/
 | Rodrigo Aljonas de Lima | 576916 | IoT / Hardware (Sensor) |
 | Enzo Bertola Coraine | 574390 | Matemática / Design UX |
 
+## 🚀 Entrega — Web Development (Front-end Dinâmico)
+
+- **JavaScript puro** (sem frameworks): slideshow com 3 imagens, validação do formulário, régua de risco e painel de monitoramento via DOM
+- **Repositório** com histórico de branches e merges para a `main`
+- **`equipe.txt`** com integrantes, RMs e link do repositório
+- **`AI.md`** com o registro do uso de IA e os prompts aplicados
+- **Site publicado:** https://lcs-rg.github.io/ecoalerta/
+
 ---
 
 *FIAP · Global Solution 2026.2 — CitizenTech*

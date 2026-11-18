@@ -507,10 +507,11 @@ nav a.ativo::after {
 }
 
 /* cena 3D flutuante fora do hero (mesmo tratamento do hero:
-   sem moldura, sombra própria, etiqueta e faixa de sinalização) */
+   sem moldura, sombra própria, etiqueta e faixa de sinalização;
+   nunca ocupa a largura inteira da página) */
 .cena-livre {
   position: relative;
-  width: min(680px, 100%);
+  width: min(560px, 92%);
   margin: 0 auto 2rem;
 }
 
@@ -1072,9 +1073,8 @@ section > p {
 }
 
 .slide {
+  position: relative;
   display: none;
-  width: 100%;
-  filter: drop-shadow(0 16px 24px rgba(8, 27, 64, 0.25));
 }
 
 .slide.ativo {
