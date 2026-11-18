@@ -485,7 +485,8 @@ nav a.ativo::after {
 }
 
 /* cena 3D do posto de monitoramento (fundo transparente) */
-.hero-cena {
+.hero-cena,
+.cena-img {
   width: 100%;
   filter: drop-shadow(0 20px 28px rgba(8, 27, 64, 0.3));
   animation: flutuar 6s ease-in-out infinite;
@@ -503,6 +504,14 @@ nav a.ativo::after {
   width: min(320px, 60%);
   margin: 0.25rem auto 0;
   background: var(--faixa);
+}
+
+/* cena 3D flutuante fora do hero (mesmo tratamento do hero:
+   sem moldura, sombra própria, etiqueta e faixa de sinalização) */
+.cena-livre {
+  position: relative;
+  width: min(680px, 100%);
+  margin: 0 auto 2rem;
 }
 
 /* ===== Seções ===== */
@@ -780,22 +789,6 @@ section > p {
   color: var(--papel);
 }
 
-/* ===== Cena vitrine da seção problema ===== */
-.cena-problema {
-  position: relative;
-  max-width: 820px;
-  margin: 0 auto 2rem;
-  border: 1px solid rgba(8, 27, 64, 0.35);
-  background: var(--branco);
-  box-shadow: 0 24px 48px rgba(8, 27, 64, 0.2);
-}
-
-/* faixa de sinalização no rodapé da placa */
-.cena-problema .cena-faixa {
-  width: 100%;
-  margin: 0;
-}
-
 /* ===== Fluxo de operação (sequência real: 01 a 04) ===== */
 .fluxo {
   display: flex;
@@ -1067,23 +1060,21 @@ section > p {
   text-align: left;
 }
 
-/* ===== Slideshow (registro de campo) ===== */
+/* ===== Slideshow (registro de campo — cenas flutuantes) ===== */
 .slideshow {
   max-width: 640px;
   margin: 2.5rem auto 0;
-  background: var(--tempestade);
-  border: 1px solid rgba(8, 27, 64, 0.35);
-  overflow: hidden;
 }
 
 .slide-janela {
   position: relative;
-  overflow: hidden;
+  margin-bottom: 0.5rem;
 }
 
 .slide {
   display: none;
   width: 100%;
+  filter: drop-shadow(0 16px 24px rgba(8, 27, 64, 0.25));
 }
 
 .slide.ativo {
@@ -1094,18 +1085,19 @@ section > p {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  border: none;
-  background: rgba(251, 232, 207, 0.15);
-  color: var(--branco);
-  font-size: 1.2rem;
-  padding: 0.6rem 0.85rem;
+  border: 1px solid rgba(8, 27, 64, 0.35);
+  background: var(--papel);
+  color: var(--tinta);
+  font-size: 1.1rem;
+  padding: 0.5rem 0.8rem;
   cursor: pointer;
-  transition: background-color 0.15s, color 0.15s;
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
 }
 
 .slide-btn:hover {
   background: var(--sirene);
   color: var(--tempestade);
+  border-color: var(--tempestade);
 }
 
 .slide-anterior {
@@ -1125,13 +1117,17 @@ section > p {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: rgba(251, 232, 207, 0.85);
-  padding: 0.6rem 0.9rem;
-  border-top: 1px solid rgba(251, 232, 207, 0.25);
+  color: var(--tinta);
+  padding: 0.6rem 0;
+  border-top: 1px solid rgba(8, 27, 64, 0.35);
+  border-bottom: 1px solid rgba(8, 27, 64, 0.35);
 }
 
 .slide-barra b {
-  color: var(--sirene);
+  font-weight: 600;
+  background: var(--sirene);
+  color: var(--tempestade);
+  padding: 0 0.4rem;
 }
 
 /* ===== Rodapé ===== */
@@ -1312,6 +1308,7 @@ footer::before {
   }
 
   .hero-cena,
+  .cena-img,
   .ponto-ativo {
     animation: none;
   }
