@@ -563,7 +563,7 @@ section h2 {
   position: relative;
   display: inline-block;
   border: 1px solid rgba(8, 27, 64, 0.35);
-  padding: 1.1rem 1.6rem;
+  padding: 1.35rem 1.6rem 1.1rem;
   margin: 0 auto 1.25rem;
   background: var(--branco);
 }
@@ -579,7 +579,7 @@ section h2 {
   letter-spacing: 0.1em;
   background: var(--sirene);
   color: var(--tempestade);
-  padding: 1px 5px;
+  padding: 2px 6px;
 }
 
 .placa img {
