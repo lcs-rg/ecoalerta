@@ -491,7 +491,7 @@ nav a.ativo::after {
 .slide .cena-tag {
   position: static;
   display: inline-block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
 /* cena 3D do posto de monitoramento (fundo transparente) */
