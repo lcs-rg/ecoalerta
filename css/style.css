@@ -464,6 +464,7 @@ nav a.ativo::after {
 .hero-cena-wrap {
   position: relative;
   width: min(640px, 100%);
+  will-change: transform;
 }
 
 /* etiqueta técnica de identificação do equipamento */
@@ -1199,7 +1200,10 @@ footer::before {
   color: rgba(251, 232, 207, 0.55);
 }
 
-/* ===== Animação de entrada (acionada por IntersectionObserver) ===== */
+/* ===== Animação de entrada (acionada por IntersectionObserver) =====
+   Sem "unobserve" no JS: o elemento anima ao entrar na tela e
+   volta ao estado inicial ao sair — a página reage ao scroll
+   nas duas direções, sem nenhuma biblioteca. */
 .revelar {
   opacity: 0;
   transform: translateY(16px);

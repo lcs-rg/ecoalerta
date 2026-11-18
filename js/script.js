@@ -237,12 +237,35 @@ if (reduzirMovimento) {
 } else {
   const observador = new IntersectionObserver((entradas) => {
     entradas.forEach((entrada) => {
-      if (entrada.isIntersecting) {
-        entrada.target.classList.add('visivel');
-        observador.unobserve(entrada.target); // anima apenas uma vez
-      }
+      // Sem "unobserve": o elemento anima sempre que entra na tela
+      // e volta ao estado inicial quando sai — a página reage ao
+      // scroll nas duas direções.
+      entrada.target.classList.toggle('visivel', entrada.isIntersecting);
     });
   }, { threshold: 0.15 });
 
   alvosRevelar.forEach((alvo) => observador.observe(alvo));
+}
+
+/* ===== Parallax sutil da cena 3D do hero ===== */
+
+// A cena sobe mais devagar que a página, criando profundidade.
+// Roda junto com o listener da régua de risco (mesma rolagem).
+const cenaHero = document.querySelector('.hero-cena-wrap');
+
+if (!reduzirMovimento && cenaHero) {
+  let quadroParallax = 0;
+
+  function atualizarParallax() {
+    // Desloca no máximo 80px, amortece após o hero sair da tela
+    const deslocamento = Math.min(window.scrollY * 0.12, 80);
+    cenaHero.style.transform = 'translateY(' + deslocamento + 'px)';
+    quadroParallax = 0;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!quadroParallax) {
+      quadroParallax = window.requestAnimationFrame(atualizarParallax);
+    }
+  }, { passive: true });
 }
