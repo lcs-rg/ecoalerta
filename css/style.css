@@ -484,6 +484,16 @@ nav a.ativo::after {
   padding: 0.35rem 0.6rem;
 }
 
+/* fora do hero a cena começa quase na borda do arquivo,
+   então a etiqueta vira placa acima da cena em vez de
+   cobrir a imagem (que flutua livre abaixo dela) */
+.cena-livre .cena-tag,
+.slide .cena-tag {
+  position: static;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
 /* cena 3D do posto de monitoramento (fundo transparente) */
 .hero-cena,
 .cena-img {
